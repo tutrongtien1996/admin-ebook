@@ -5,8 +5,6 @@ const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const { _initRoute } = require('./src/route/_init');
 const { ConfigSession } = require('./src/helper/config');
-const session = require('express-session');
-
 dotenv.config();
 
 const app = express();
@@ -23,13 +21,7 @@ app.engine('hbs', exphbs.engine({
 app.use(express.static('public'))
 app.set('view engine', 'hbs')
 app.set('views',__dirname + '/src/view/pages');
-
-app.use(session({
-  resave: true, 
-  saveUninitialized: true, 
-  secret: 'somesecret', 
-  cookie: { maxAge: 60000 }
-}));
+ConfigSession(app)
 _initRoute(app)
 
 app.listen(port, () => {
