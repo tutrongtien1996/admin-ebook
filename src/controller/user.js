@@ -1,8 +1,10 @@
+const { UserModel } = require("../model/user");
 
 
 const UserController = {
-  index: function(request, response) {
-    response.render('user');
+  index: async function(request, response) {
+    var items = await UserModel.list(null)
+    response.render('user', {users: items});
   }
 }
 

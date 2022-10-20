@@ -1,9 +1,9 @@
 const { db } = require("../helper/database")
 
-const UserModel = {
+const AdminModel = {
   list: async function(params) {
     try {
-      var results = await db.from('users').select("*")
+      var results = await db.from('admins').select("*")
         .orderBy('created_at', 'desc')
       return results
     } catch (err) {
@@ -13,17 +13,18 @@ const UserModel = {
 
   find: async function(params) {
     try {
-      var query = db.from('users').select("*")
-      params.each((key, value) => {
-        switch (key) {
-            case "id":
-            case "email":
-              query = query.where(key, value)
+      var query = db.from('admins').select("*")
+      if (Object.keys(params).length > 0) {
+        for (const key in params) {
+          switch (key) {
+            case "id", "email":
+              query = query.where(key, params[key])
               break;
             default:
               break;
           }
-      })
+        }
+      }
       var result = await query.first()
       return result
     } catch (err) {
@@ -32,4 +33,4 @@ const UserModel = {
   }
 }
 
-module.exports = {UserModel}
+module.exports = {AdminModel}
