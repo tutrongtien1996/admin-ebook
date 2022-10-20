@@ -2,7 +2,7 @@
 
 const UserController = {
   index: function(request, response) {
-    response.send("User Dashboard")
+    response.render('user');
   }
 }
 
