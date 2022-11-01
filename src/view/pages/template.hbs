@@ -5,6 +5,7 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Templates</li>
         </ol>
+        <button>ADD</button>
         <div class="card mb-4">
             <div class="card-header">
                 <i class="fas fa-table me-1"></i>
@@ -17,6 +18,7 @@
                             <th>Thumbnail</th>
                             <th>Name</th>
                             <th>Slug</th>
+                            <th>Preview</th>
                             
                         </tr>
                     </thead>
@@ -26,6 +28,7 @@
                             <td><img height="100px" width="auto" src="{{thumbnail_url}}"></td>
                             <td>{{name}}</td>
                             <td>{{slug}}</td>
+                            <td><a href="https://webneeder.com/{{demo_url}}" target="_blank" style="text-decoration: none;">demo</a></td>
                         </tr>
                         {{/each}}
                     </tbody>
