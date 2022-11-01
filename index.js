@@ -24,6 +24,7 @@ app.set('views',__dirname + '/src/view/pages');
 ConfigSession(app)
 _initRoute(app)
 
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
