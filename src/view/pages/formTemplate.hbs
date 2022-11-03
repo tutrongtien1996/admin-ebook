@@ -3,30 +3,29 @@
     <div class="container-fluid px-4">
         <h1 class="mt-4">Dashboard</h1>
         <ol class="breadcrumb mb-4">
-            <li class="breadcrumb-item active">Templates</li>
+            <li class="breadcrumb-item active">Import template from remote ZIP</li>
         </ol>
-        <div>
+        <div class="col-md-6 sol-sm-12">
             <form action="/templates/form" method="post">
-                <h1>
-                    Template
-                </h1>
-                <div>
-                    <label for="">name</label>
-                    <input type="text" name="name">
-                </div>
-                <div>
-                    <label for="">category</label>
-                    <select name="category" id="cars">
-                        {{#each items}}
-                            <option value="{{id}}">{{ title }}</option>
-                        {{/each}}
-                    </select>
-                </div>
-                <div>
-                    <label for="">file</label>
-                    <input type="text" name="zip_url">
-                </div>
-                <input type="submit">
+                <fieldset>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select name="category" class="form-select">
+                            {{#each items}}
+                                <option value="{{id}}">{{ title }}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">ZIP Path</label>
+                        <input type="text" name="zip_url" class="form-control">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
             </form>
         </div>
     </div>

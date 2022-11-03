@@ -1,4 +1,6 @@
 const { TemplateModel } = require("../model/template");
+const { CategoryModel } = require("../model/category");
+const { WebNeederAdapter } = require("../adapter/webneeder");
 
 
 const TemplateController = {
@@ -7,15 +9,19 @@ const TemplateController = {
     response.render('template', {items: items});
   },
 
-  getCategories: async function(request, response) {
-    var  items = await TemplateModel.listCategory()
+  formCreate: async function(request, response) {
+    var  items = await CategoryModel.list()
     response.render('formTemplate', {items: items})
   },
 
-  createTemplate: async function(request, response){
+  store: async function(request, response){
     var input = request.body
-    await TemplateModel.createTemplate(input)
-    return  response.redirect('http://localhost:3003/templates');
+    WebNeederAdapter.ImportTemplate({
+      name: input.name,
+      url: input.zip_url,
+      category_id: input.category
+    })
+    return  response.redirect('/templates');
   }
 
 }

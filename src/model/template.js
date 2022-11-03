@@ -10,16 +10,6 @@ const TemplateModel = {
     }
   },
 
-  listCategory: async function(){
-    try {
-      var results = await db.from('categories').select('*')
-      return results
-    }
-    catch (err){
-      return null;
-    }
-  },
-
   createTemplate: async function(input){
    try {
     let id = Math.floor(Math.random() * 100000)

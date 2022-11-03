@@ -1,4 +1,4 @@
-# Simple NodeJS Admin
+# WebNeeder Admin Dashboard
 ## Requirements
 - NodeJS version ``^12.0``
 - Mysql version ``^8.0``
