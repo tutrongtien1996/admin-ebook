@@ -15,7 +15,7 @@ const TemplateController = {
   createTemplate: async function(request, response){
     var input = request.body
     await TemplateModel.createTemplate(input)
-    return  response.redirect('http://localhost:3003/templates');
+    return  response.redirect('/templates');
   }
 
 }
