@@ -1,0 +1,33 @@
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Templates</li>
+        </ol>
+        <div>
+            <form action="/templates/form" method="post">
+                <h1>
+                    Template
+                </h1>
+                <div>
+                    <label for="">name</label>
+                    <input type="text" name="name">
+                </div>
+                <div>
+                    <label for="">category</label>
+                    <select name="category" id="cars">
+                        {{#each items}}
+                            <option value="{{id}}">{{ title }}</option>
+                        {{/each}}
+                    </select>
+                </div>
+                <div>
+                    <label for="">file</label>
+                    <input type="text" name="zip_url">
+                </div>
+                <input type="submit">
+            </form>
+        </div>
+    </div>
+</main>

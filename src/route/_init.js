@@ -4,6 +4,7 @@ const { DashboardRouter } = require("./dashboard")
 const { UserRouter } = require("./user")
 const { TemplateRouter } = require("./template")
 const { WebsiteRouter } = require("./website")
+// const {formInputRouter} = require("./formInp")
 
 const _initRoute = function (app) {
   app.use('/', DashboardRouter)
