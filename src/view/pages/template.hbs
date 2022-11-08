@@ -18,17 +18,22 @@
                             <th>Thumbnail</th>
                             <th>Name</th>
                             <th>Slug</th>
-                            <th>Preview</th>
-                            
+                            <th>Categories</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         {{#each items}}
                         <tr>
-                            <td><img height="100px" width="auto" src="{{thumbnail_url}}"></td>
+                            <td></td>
                             <td>{{name}}</td>
                             <td>{{slug}}</td>
-                            <td><a href="https://webneeder.com/{{demo_url}}" target="_blank" style="text-decoration: none;">demo</a></td>
+                            <td>{{category.name}}</td>
+                            <td>
+                                <a href="https://webneeder.com/{{demo_url}}" target="_blank" class="btn btn-sm btn-primary">View</a>
+                                <a  href="/templates/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>
+                                <a href="/templates/{{id}}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
                         </tr>
                         {{/each}}
                     </tbody>

@@ -10,6 +10,15 @@ const TemplateModel = {
     }
   },
 
+  one: async function(id) {
+    try {
+      var row = await db.from('templates').where('id', id).first("*")
+      return row
+    } catch (err) {
+      return null;
+    }
+  },
+
   createTemplate: async function(input){
    try {
     let id = Math.floor(Math.random() * 100000)

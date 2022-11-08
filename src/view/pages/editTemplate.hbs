@@ -1,0 +1,40 @@
+
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Update Template</li>
+        </ol>
+        <div class="col-md-6 sol-sm-12">
+            <form action="/templates/edit/{{item.id}}" id="usrform" method="post">
+                <fieldset>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        <input type="text" name="name" value="{{item.name}}" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Category</label>
+                        <select name="category_id" class="form-select">
+                            {{#each categories}}
+                                <option value="{{id}}" 
+                                {{#if is_active}}
+                                selected
+                                {{/if}}
+                                >{{ title }}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">User</label>
+                        <input type="text" name="user_id" value="{{item.user_id}}"   class="form-control">
+                    </div>
+                     <div class="mb-3">
+                        <label class="form-label">Description</label><br>
+                        <textarea name = "description" value="{{item.description}}"  id="message" rows="4" style="width: 100%" class="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Your message..."></textarea>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>
