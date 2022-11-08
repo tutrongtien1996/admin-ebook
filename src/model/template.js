@@ -10,12 +10,11 @@ const TemplateModel = {
     }
   },
 
-  listCategory: async function(){
+  one: async function(id) {
     try {
-      var results = await db.from('categories').select('*')
-      return results
-    }
-    catch (err){
+      var row = await db.from('templates').where('id', id).first("*")
+      return row
+    } catch (err) {
       return null;
     }
   },

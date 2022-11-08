@@ -1,6 +1,7 @@
 const { db } = require("../helper/database")
 
 const CategoryModel = {
+  
   list: async function(params) {
     try {
       var results = await db.from('categories').select("*")
@@ -10,6 +11,8 @@ const CategoryModel = {
       return null;
     }
   }
+
+  
 
  
 }

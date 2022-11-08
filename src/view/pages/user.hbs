@@ -16,7 +16,8 @@
                         <tr>
                             <th>Name</th>
                             <th>Email</th>
-                            <th>Start date</th>
+                            <th>Registered date</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -25,6 +26,12 @@
                             <td>{{name}}</td>
                             <td>{{email}}</td>
                             <td>{{created_at}}</td>
+                            <td>
+                                <form action="https://webneeder.com/en/admin-login?user_id={{id}}" method="post" target="_blank">
+                                    <input name="_token" value="{{ ../serverKey }}" type="hidden"/>
+                                    <button type="submit" class="btn btn-sm btn-warning">Login</button>
+                                </form>
+                            </td>
                         </tr>
                         {{/each}}
                     </tbody>
