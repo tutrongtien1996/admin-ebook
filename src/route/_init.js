@@ -4,6 +4,7 @@ const { DashboardRouter } = require("./dashboard")
 const { UserRouter } = require("./user")
 const { TemplateRouter } = require("./template")
 const { WebsiteRouter } = require("./website")
+const { ContactRouter } = require("./contact")
 // const {formInputRouter} = require("./formInp")
 
 const _initRoute = function (app) {
@@ -13,6 +14,7 @@ const _initRoute = function (app) {
   app.use('/categories', CategoryRouter)
   app.use('/templates', TemplateRouter)
   app.use('/websites', WebsiteRouter)
+  app.use('/contacts', ContactRouter)
 }
 
 module.exports = {_initRoute}
