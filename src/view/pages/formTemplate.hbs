@@ -5,24 +5,38 @@
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Import template from remote ZIP</li>
         </ol>
-        <div class="col-md-6 sol-sm-12">
+        <div class="col-md-12 sol-sm-12">
             <form action="/templates/form" method="post">
                 <fieldset>
+                    <div class="input-group mb-3">
+                        <input type="text" class="form-control" id="url_template" placeholder="URL" aria-label="URL" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" id = "search" type="button">Search</button>
+                        </div>
+                    </div>
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" name="name" class="form-control">
+                        <input type="text" id="name_template" name="name" class="form-control">
                     </div>
                     <div class="mb-3">
                         <label class="form-label">Category</label>
-                        <select name="category" class="form-select">
+                        <select name="category_id" class="form-select">
                             {{#each items}}
                                 <option value="{{id}}">{{ title }}</option>
                             {{/each}}
                         </select>
                     </div>
                     <div class="mb-3">
+                        <label class="form-label">Thumbnail URL</label>
+                        <input type="text" id="thumbnail_url" name="thumbnail_url" class="form-control">
+                    </div>
+                    <div class="mb-3">
                         <label class="form-label">ZIP Path</label>
-                        <input type="text" name="zip_url" class="form-control">
+                        <input type="text" id="zip_url" name="zip_url" class="form-control">
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Description</label>
+                        <textarea id="description" name="description" class="form-control" rows="10"></textarea>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </fieldset>

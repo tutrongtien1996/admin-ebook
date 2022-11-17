@@ -18,7 +18,7 @@ app.engine('hbs', exphbs.engine({
   extname: 'hbs',
   defaultLayout: 'main',
 }))
-app.use(express.static('public'))
+app.use('/public', express.static('public'))
 app.set('view engine', 'hbs')
 app.set('views',__dirname + '/src/view/pages');
 ConfigSession(app)

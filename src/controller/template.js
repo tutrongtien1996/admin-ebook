@@ -18,8 +18,10 @@ const TemplateController = {
     var input = request.body
     WebNeederAdapter.ImportTemplate({
       name: input.name,
-      url: input.zip_url,
-      category_id: input.category
+      zip_url: input.zip_url,
+      category_id: input.category_id,
+      description: input.description,
+      thumbnail_url: input.thumbnail_url
     })
     return  response.redirect('/templates');
   },
