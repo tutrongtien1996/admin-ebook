@@ -1,0 +1,70 @@
+
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="mt-4 text-info">Create new Book</h3>
+        <div class="col-md-12 sol-sm-12">
+            {{#if id}}
+            <form action="/books/edit/{{id}}" method="post" enctype="multipart/form-data">
+            {{else}}
+            <form action="/books/form" method="post" enctype="multipart/form-data">
+            {{/if}}
+                <div class="row  gx-3">
+                    <div class="mb-3 col">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control shadow-none" id="name" placeholder="Enter name" name="name">
+                    </div>
+                
+                    <div class="mb-3 col">
+                        <label for="audio_url" class="form-label">Audio URL:</label>
+                        <input type="text" class="form-control shadow-none" id="audio_url" placeholder="Enter audio url" name="audio_url">
+                    </div>
+                </div>
+                <div class="row gx-3">
+                    <div class="mb-3 col">
+                        <label for="category_id" class="form-label">Categories:</label>
+                        <select class="form-select shadow-none" id="category_id" aria-label="Default select example" name="category_id">
+                            <option value="1">Select category</option>
+                            {{#each categories}}
+                            <option value="{{id}}" class="border-bottom">{{name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                    <div class="col position-relative">
+                        <div><label for="author_id" class="form-label">Author:</label></div>
+                        <div class="input-group mb-3"> 
+                            <input type="text" class="form-control shadow-none" placeholder="Enter Author here" name="user_display" id="author_id" autocomplete="off" aria-describedby="basic-addon2">
+                            <input type="text" name="user_id" class="d-none shadow-none">
+                            <div class="input-group-append">
+                                <span class="input-group-text spanAdd" id="basic-addon2" role="button">Add</span>
+                            </div>
+                        </div>
+                        <div class="list_author position-absolute">
+                            <ul class="list-group"></ul>
+                        </div>
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="image" class="form-label">Image</label>
+                        <input class="form-control shadow-none" type="file" id="image" accept="image/png, image/jpeg" name="image">
+                    </div>
+                </div>
+            
+                <div class="mb-3">  
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>    
+                </div>
+                <div class="row  gx-3">
+                    <div class="mb-3 col">
+                        <label for="youtube_id" class="form-label">Youtube id:</label>
+                        <input type="text" class="form-control shadow-none" id="youtube_id" placeholder="Enter youtube id" name="youtube_id">
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="chanel_video" class="form-label">Chanel video:</label>
+                        <input type="text" class="form-control shadow-none" id="chanel_video" placeholder="Enter chanel video" name="chanel_video">
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
+        </div>
+    </div>
+</main>
+<script src="/public/js/authorHandle.js"></script>

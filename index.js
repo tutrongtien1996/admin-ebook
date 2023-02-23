@@ -1,13 +1,17 @@
 const express = require('express');
+const cors = require('cors')
 const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
 const { _initRoute } = require('./src/route/_init');
+const { _initRouteAPI } = require('./srcAPI/routes/init.js');
 const { ConfigSession } = require('./src/helper/config');
 dotenv.config();
 
 const app = express();
+app.use(cors())
+
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
@@ -19,10 +23,12 @@ app.engine('hbs', exphbs.engine({
   defaultLayout: 'main',
 }))
 app.use('/public', express.static('public'))
+app.use('/upload', express.static('upload'))
 app.set('view engine', 'hbs')
 app.set('views',__dirname + '/src/view/pages');
 ConfigSession(app)
 _initRoute(app)
+_initRouteAPI(app)
 
 
 app.listen(port, () => {

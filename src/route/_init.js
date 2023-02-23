@@ -1,20 +1,15 @@
 const { AuthRouter } = require("./auth")
 const { CategoryRouter } = require("./category")
-const { DashboardRouter } = require("./dashboard")
-const { UserRouter } = require("./user")
-const { TemplateRouter } = require("./template")
-const { WebsiteRouter } = require("./website")
-const { ContactRouter } = require("./contact")
-// const {formInputRouter} = require("./formInp")
+const { BookRouter } = require("./book")
+const { AuthorRouter } = require("./author")
+const { CheckLoggedIn } = require("../helper/util")
 
 const _initRoute = function (app) {
-  app.use('/', DashboardRouter)
+  app.get('/', CheckLoggedIn, (request, response) => response.redirect('/books'))
   app.use('/auth', AuthRouter)
-  app.use('/users', UserRouter)
   app.use('/categories', CategoryRouter)
-  app.use('/templates', TemplateRouter)
-  app.use('/websites', WebsiteRouter)
-  app.use('/contacts', ContactRouter)
+  app.use('/books', BookRouter)
+  app.use('/authors', AuthorRouter)
 }
 
 module.exports = {_initRoute}

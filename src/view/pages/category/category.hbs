@@ -1,0 +1,38 @@
+
+<main>
+    <div class="container-fluid px-4">
+        <h3 class="my-4">Danh Mục Sách</h3>
+        
+        <div class="card mb-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                List of Danh Mục
+                <a href="/categories/form" class="btn btn-sm btn-primary float-end">Add</a>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr>
+                            <th>id</th>
+                            <th>Name</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each items}}
+                        <tr>
+                            <td>{{id}}</td>
+                            <td>{{name}}</td>
+                            <td>
+                                <a href="/categories/one/{{id}}" class="btn btn-sm btn-primary">List books</a>
+                                <a  href="/categories/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>
+                                <a href="/categories/delete/{{id}}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

@@ -2,7 +2,7 @@
 
 const DashboardController = {
   index: function(request, response) {
-    response.render('dashboard');
+    response.render('dashboard', {data: request.session.user});
   }
 }
 

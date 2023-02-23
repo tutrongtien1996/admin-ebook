@@ -75,6 +75,14 @@
     scroll-behavior: smooth;
   }
 }
+.list_author ul{
+  max-height: 150px;
+  overflow-y: scroll;
+}
+#datatablesSimple tbody td img {
+  height: 40px;
+  width: 40px;
+}
 
 body {
   margin: 0;

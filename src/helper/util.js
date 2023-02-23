@@ -6,10 +6,17 @@ function IsLogged(request) {
 }
 
 function CheckLoggedIn(req, res, next) {
+
   if (!IsLogged(req)) {
-    return res.redirect("/auth/login")
+    res.redirect("/auth/login");
+    return;
+  } else {
+    return next()
   }
-  return next()
 }
 
-module.exports = {CheckLoggedIn}
+function getTokenSession(request){
+  return {headers: { authorization: request.session.user.accessToken}}
+}
+
+module.exports = {CheckLoggedIn, getTokenSession}

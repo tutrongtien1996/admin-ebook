@@ -1,0 +1,36 @@
+
+<main>
+    <div class="container-fluid px-4">
+        
+        <div class="card  my-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Book
+                <a href="/books/form" class="btn btn-sm btn-primary float-end">Add</a>
+            </div>
+            <div class="card-body">
+                <div>
+                    {{#if item}}
+                    <div id="image_title" class="row">
+                        <div class="col-3"><img src="http://localhost:5506/{{item.image}}" style="height: 200px"></div>
+                        <div class="col-9">
+                            <ul class="list-unstyled">
+                                <li class="py-1"><strong class="me-1">Name:</strong><p class="d-inline fw-light">{{item.name}}</p></li>
+                                <li class="py-1"><strong class="me-1">Category:</strong><p class="d-inline fw-light">{{item.category_name}}</p></li>
+                                <li class="py-1"><strong class="me-1">Author:</strong><p class="d-inline fw-light">{{item.author_name}}</p></li>
+                                <li class="py-1"><strong class="me-1">Audio URL:</strong><a href="#" class="d-inline fw-light">{{item.audio_url}}</a></li>
+                                <li class="py-1"><strong class="me-1">Youtube ID:</strong><a href="#" class="d-inline fw-light">{{item.youtube_id}}</a></li>
+                                <li class="py-1"><strong class="me-1">Chanel Video:</strong><a href="#" class="d-inline fw-light">{{item.chanel_video}}</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                       <strong>Description:</strong><p class="fst-italic fw-light">{{item.description}}</p>
+                    </div>
+                    {{/if}}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</main>

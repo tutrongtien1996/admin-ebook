@@ -1,27 +1,17 @@
-const { AdminModel } = require("../model/admin");
-const bcrypt = require('bcrypt');
+
+const { AuthAPIController } = require("../../srcAPI/controller/auth");
+
 
 
 const AuthController = {
   login: function(request, response) {
-    response.render('login', {layout: false});
+    return response.render('login', {layout: false});
   },
   DoLogin: async function(request, response) {
-    var user = await AdminModel.find({
-      "email": request.body.email,
-    })
-    if (user == null || user == undefined) {
-      response.redirect("/auth/login")
-      return
-    }
-    bcrypt.compare(request.body.password, user.password, function(err, match) {
-      if (err != undefined || !match) {
-        response.redirect("/auth/login")
-        return
-      }
-    });
-    request.session.user = {id: user.id, name: user.name, email: user.email}
-    response.redirect("/")
+    request.isServer = true
+    const result = await AuthAPIController.login(request, response);
+    if(result.value){request.session.user = {id: result.user.id, name: result.user.name, accessToken: result.accessToken}}
+    return !result.value ? response.redirect('/auth/login') : response.redirect('/books')
   }
 }
 

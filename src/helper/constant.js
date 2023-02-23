@@ -1,4 +1,4 @@
 const constants = {
-    WEBNEEDER_URL: "https://webneeder.com/api/templates",
+    EBOOK_URL: "http://127.0.0.1:3022",
 }
 module.exports = {constants}

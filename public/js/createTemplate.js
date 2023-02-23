@@ -1,8 +1,5 @@
 
 
-
-
-console.log("Hello")
 let btn = document.getElementById("search")
 let url = document.getElementById("url_template")
 

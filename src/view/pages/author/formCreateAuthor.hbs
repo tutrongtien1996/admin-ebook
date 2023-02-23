@@ -1,0 +1,38 @@
+<main>
+    <div class="container-fluid px-4">
+        <h1 class="mt-4">Dashboard</h1>
+        <ol class="breadcrumb mb-4">
+            <li class="breadcrumb-item active">Create new author</li>
+        </ol>
+        <div class="col-md-12 sol-sm-12">
+            {{#if item}}
+            <form action="/authors/edit/{{item.id}}" method="post">
+            {{else}}
+            <form action="/authors/form" method="post">
+            {{/if}}
+                <fieldset>
+                    <div class="mb-3">
+                        <label class="form-label">Name</label>
+                        {{#if item}}
+                        <input type="text" id="name_template" name="name" class="form-control" value="{{item.name}}">
+                        {{else}}
+                        <input type="text" id="name_template" name="name" class="form-control" placeholder="Enter author"   value="">
+                        {{/if}}
+                    </div>
+                    <div class="row  gx-3">
+                        <div class="mb-3 col">
+                            <label for="chanel_id" class="form-label"> Chanel id:</label>
+                            <input type="text" class="form-control" id="chanel_id"  {{#if item.chanel_id}} placeholder="{{item.chanel_id}}" {{else}} placeholder="Enter chanel id" {{/if}} name="chanel_id">
+                        </div>
+                    
+                        <div class="mb-3 col">
+                            <label for="chanel_url" class="form-label">Chanel URL:</label>
+                            <input type="text" class="form-control" id="chanel_url" {{#if item.chanel_url}} placeholder="{{item.chanel_url}}" {{else}} placeholder="Enter chanel url" {{/if}} name="chanel_url">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</main>

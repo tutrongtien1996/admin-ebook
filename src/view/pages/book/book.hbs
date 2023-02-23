@@ -1,0 +1,41 @@
+
+<main>
+    <div class="container-fluid px-4">
+        
+        <div class="card  my-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                List of Books
+                <a href="/books/form" class="btn btn-sm btn-primary float-end">Add</a>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead >
+                        <tr class="row">
+                            <th class="col-1">Image</th>
+                            <th  class="col-3">Name</th>
+                            <th  class="col-4">Description</th>
+                            <th  class="col-2">Audio_url</th>
+                            <th class="col-2">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each items}}
+                        <tr class="row">
+                            <td  class="col-1"><img src="http://localhost:5506/{{image}}" alt="image"></td>
+                            <td  class="col-3">{{name}}</td>
+                            <td  class="col-4"><p class="overflow-auto">{{description}}</p></td>
+                            <td  class="col-2"><div class="overflow-hidden"><a href="{{audio_url}}">{{audio_url}}</a></div></td>
+                            <td class="col-2">
+                                <a href="/books/one/{{id}}" class="btn btn-sm btn-primary">View</a>
+                                <a  href="/books/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>
+                                <a href="/books/delete/{{id}}" class="btn btn-sm btn-danger">Del</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>

@@ -1,0 +1,36 @@
+
+<main>
+    <div class="container-fluid px-4">
+        <div class="card my-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Danh sách tác giả
+                <a href="/authors/form" class="btn btn-sm btn-primary float-end">Add</a>
+            </div>
+            <div class="card-body">
+                <table id="datatablesSimple">
+                    <thead>
+                        <tr class="row">
+                            <th class ="col-3">Name</th>
+                            <th class="col-6">Chanel Url</th>
+                            <th class="col-3">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {{#each items}}
+                        <tr class="row">
+                            <td class="col-3">{{name}}</td>
+                            <td class="col-6">{{chanel_url}}</td>
+                            <td class="col-3">
+                                <a href="#" class="btn btn-sm btn-primary">View</a>
+                                <a  href="/authors/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>
+                                <a href="/authors/delete/{{id}}" class="btn btn-sm btn-danger">Delete</a>
+                            </td>
+                        </tr>
+                        {{/each}}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</main>
