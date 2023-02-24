@@ -1,10 +1,11 @@
-const {db} = require('../common/connectDB')
+const {db} = require('../common/connectDB');
 
 const BookModel = {
-    list: async function(){
+    list: async function(filter){
         try{
-            let results =  await db('books').select('*');
-            return results;
+            let count =  await db('books').count('id',{as: 'count'});
+            let results =  await db('books').select('*').limit(filter.limit).offset(filter.offset);
+            return {results, count: count[0].count};
         }
         catch {
             return null

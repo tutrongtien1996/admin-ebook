@@ -19,12 +19,12 @@
                             <th class="col-2">Action</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        {{#each items}}
+                    <tbody class="">
+                        {{#each items.results}}
                         <tr class="row">
-                            <td  class="col-1"><img src="http://localhost:5506/{{image}}" alt="image"></td>
-                            <td  class="col-3">{{name}}</td>
-                            <td  class="col-4"><p class="overflow-auto">{{description}}</p></td>
+                            <td style=""><img src="http://localhost:5506/{{image}}" alt="image"></td>
+                            <td style="">{{name}}</td>
+                            <td  class=""><div><p class="overflow-auto">{{description}}</p></div></td>
                             <td  class="col-2"><div class="overflow-hidden"><a href="{{audio_url}}">{{audio_url}}</a></div></td>
                             <td class="col-2">
                                 <a href="/books/one/{{id}}" class="btn btn-sm btn-primary">View</a>
@@ -35,6 +35,21 @@
                         {{/each}}
                     </tbody>
                 </table>
+                <div data-count="{{items.count}}">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item disabled">
+                            <a class="page-link" href="#" tabindex="-1" aria-disabled="true">All</a>
+                            </li>
+                            {{#each items.pages}}
+                            <li class="page-item"><a class="page-link" href="/books?page={{this}}">{{this}}</a></li>
+                            {{/each}}
+                            <li class="page-item">
+                            <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
             </div>
         </div>
     </div>

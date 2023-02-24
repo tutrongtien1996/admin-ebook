@@ -1,15 +1,18 @@
 
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-const {BookModel} = require('../../srcAPI/model/book')
+const {BookModel} = require('../../srcAPI/model/book');
+const { Helper } = require('../helper/checkParams');
 const {CategoryController} = require('./category')
 
 
 
 const BookController = {
   index: async function(request, response) {
-    const results = await  BookModel.list();
-    response.render('book/book', {items: results});
+    const query_filter = Helper.setFilter(request.query);
+    const data = await  BookModel.list(query_filter);
+    data.pages = Helper.pages(data.count);
+    response.render('book/book', {items: data});
   },
   one: async function(request, response) {
     const input = {id: request.params.id}
@@ -47,8 +50,9 @@ const BookController = {
   formEdit: async function(request, response) {
     request.url_create_book = "formCreateBook"
     let categories = await CategoryController.index(request, response)
-    let {id} = request.params;
-    response.render('book/formCreateBook', {categories, id});
+    const input = {id: request.params.id}
+    let book_data = await BookModel.one(input)
+    response.render('book/formCreateBook', {categories, book: book_data[0]});
   },
 
   update: async function(request, response) {

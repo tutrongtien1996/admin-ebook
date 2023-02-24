@@ -3,20 +3,28 @@
     <div class="container-fluid px-4">
         <h3 class="mt-4 text-info">Create new Book</h3>
         <div class="col-md-12 sol-sm-12">
-            {{#if id}}
-            <form action="/books/edit/{{id}}" method="post" enctype="multipart/form-data">
+            {{#if book}}
+            <form action="/books/edit/{{book.id}}" method="post" enctype="multipart/form-data">
             {{else}}
             <form action="/books/form" method="post" enctype="multipart/form-data">
             {{/if}}
                 <div class="row  gx-3">
                     <div class="mb-3 col">
                         <label for="name" class="form-label">Name:</label>
+                        {{#if book}}
+                        <input type="text" class="form-control shadow-none" id="name" placeholder="Enter name" value="{{book.name}}" name="name">
+                        {{else}}
                         <input type="text" class="form-control shadow-none" id="name" placeholder="Enter name" name="name">
+                        {{/if}}
                     </div>
                 
                     <div class="mb-3 col">
                         <label for="audio_url" class="form-label">Audio URL:</label>
+                        {{#if book}}
+                        <input type="text" class="form-control shadow-none" id="audio_url" placeholder="Enter audio url" value="{{book.audio_url}}" name="audio_url">
+                        {{else}}
                         <input type="text" class="form-control shadow-none" id="audio_url" placeholder="Enter audio url" name="audio_url">
+                        {{/if}}
                     </div>
                 </div>
                 <div class="row gx-3">
@@ -32,7 +40,11 @@
                     <div class="col position-relative">
                         <div><label for="author_id" class="form-label">Author:</label></div>
                         <div class="input-group mb-3"> 
+                        {{#if book}}
+                            <input type="text" class="form-control shadow-none" placeholder="Enter Author here" name="user_display" id="author_id" value="{{book.author_name}}" autocomplete="off" aria-describedby="basic-addon2">
+                        {{else}}
                             <input type="text" class="form-control shadow-none" placeholder="Enter Author here" name="user_display" id="author_id" autocomplete="off" aria-describedby="basic-addon2">
+                        {{/if}}
                             <input type="text" name="user_id" class="d-none shadow-none">
                             <div class="input-group-append">
                                 <span class="input-group-text spanAdd" id="basic-addon2" role="button">Add</span>
@@ -50,16 +62,28 @@
             
                 <div class="mb-3">  
                     <label for="exampleFormControlTextarea1" class="form-label">Description</label>
-                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>    
+                    {{#if book}}
+                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="3" name="description">{{book.description}}</textarea>    
+                    {{else}}
+                    <textarea class="form-control shadow-none" id="exampleFormControlTextarea1" rows="3" name="description"></textarea>  
+                    {{/if}}  
                 </div>
                 <div class="row  gx-3">
                     <div class="mb-3 col">
                         <label for="youtube_id" class="form-label">Youtube id:</label>
+                    {{#if book}}
+                        <input type="text" class="form-control shadow-none" id="youtube_id" placeholder="Enter youtube id" name="youtube_id" value="{{book.youtube_id}}">
+                        {{else}}
                         <input type="text" class="form-control shadow-none" id="youtube_id" placeholder="Enter youtube id" name="youtube_id">
+                        {{/if}}
                     </div>
                     <div class="mb-3 col">
                         <label for="chanel_video" class="form-label">Chanel video:</label>
+                    {{#if book}}
+                        <input type="text" class="form-control shadow-none" id="chanel_video" placeholder="Enter chanel video" name="chanel_video" value="{{book.chanel_video}}">
+                        {{else}}
                         <input type="text" class="form-control shadow-none" id="chanel_video" placeholder="Enter chanel video" name="chanel_video">
+                        {{/if}}
                     </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
