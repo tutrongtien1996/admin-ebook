@@ -31,7 +31,16 @@ const BookController = {
     ,
     delete: async (req, res) => {
         let input = {id: req.params.id}
+        const data = await  BookModel.one(input);
+        if(!data){
+          return  ResponseFail(res, "data not exist!")
+        }
         const results = await  BookModel.delete(input);
+        if(results && data[0].image){
+            if(fs.existsSync( data[0].image )){
+              fs.unlinkSync(data[0].image);
+              } 
+        }
         return (results ? ResponseSuccess(res, "", results) : ResponseFail(res, "data not exist!"))
     },
     update: async (request, res) => {
@@ -43,6 +52,9 @@ const BookController = {
         let input = {id: request.params.id,
         data: request.body}
         const data_get = await BookModel.one(input);
+        if(!data_get){
+            return  ResponseFail(res, "data not exist!");
+          }
         const results = await  BookModel.update(input);
         if(!results && request.file){
             fs.unlinkSync(request.file.path);
