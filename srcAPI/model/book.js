@@ -1,6 +1,15 @@
 const {db} = require('../common/connectDB');
 
 const BookModel = {
+    list_api: async function(filter){
+        try{
+            let results =  await db('books').select('*');
+            return {results};
+        }
+        catch {
+            return null
+        }
+    },
     list: async function(filter){
         try{
             let count =  await db('books').count('id',{as: 'count'});

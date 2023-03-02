@@ -11,7 +11,6 @@ const db = require('knex')({
   }
 });
 db.raw("SELECT 1").then(() => {
-  console.log("Success connected");
 })
 .catch((e) => {
   console.log("cuccess not connected");
