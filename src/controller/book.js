@@ -11,6 +11,9 @@ const BookController = {
   index: async function(request, response) {
     const query_filter = Helper.setFilter(request.query);
     const data = await  BookModel.list(query_filter);
+    data.results.forEach(element => {
+       element.description = element.description.slice(0, 150) + "..."
+    });
     data.pages = Helper.pages(data.count);
     response.render('book/book', {items: data});
   },
