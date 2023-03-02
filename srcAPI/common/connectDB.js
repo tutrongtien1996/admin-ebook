@@ -10,5 +10,12 @@ const db = require('knex')({
     database: dotenv.parsed.MY_DATABASE
   }
 });
+db.raw("SELECT 1").then(() => {
+  console.log("Success connected");
+})
+.catch((e) => {
+  console.log("cuccess not connected");
+  console.error(e);
+});
 
 module.exports = {db}
