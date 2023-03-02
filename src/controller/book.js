@@ -18,7 +18,8 @@ const BookController = {
       }
     });
     data.pages = Helper.pages(data.count);
-    response.render('book/book', {items: data});
+    let accessToken = request.session.user.accessToken
+    response.render('book/book', {accessToken, items: data});
   },
   one: async function(request, response) {
     const input = {id: request.params.id}
