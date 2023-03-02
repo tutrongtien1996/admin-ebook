@@ -12,7 +12,10 @@ const BookController = {
     const query_filter = Helper.setFilter(request.query);
     const data = await  BookModel.list(query_filter);
     data.results.forEach(element => {
-       element.description = element.description.slice(0, 150) + "..."
+      if(element.description){
+        element.description = element.description.slice(0, 150) + "..."
+
+      }
     });
     data.pages = Helper.pages(data.count);
     response.render('book/book', {items: data});
@@ -30,6 +33,11 @@ const BookController = {
 
   store: async function(request, response){
     var input =  request.body;
+    if(!request.body.name && request.file){
+      fs.unlinkSync(request.file.path);
+    }
+    if(!request.body.name){return ResponseFail(res, "data error!")}
+
     delete input.user_display;
     request.file ? (input.image = request.file.path) : (input.image = "")
     input.id = uuidv4();
@@ -45,7 +53,9 @@ const BookController = {
     const data = await  BookModel.one(input);
     const results = await  BookModel.delete(input);
     if(results && data[0].image){
-      fs.unlinkSync(data[0].image);
+      if(fs.existsSync( data[0].image )){
+        fs.unlinkSync(data[0].image);
+        } 
     }
     return  response.redirect('/books');
   },
@@ -60,12 +70,22 @@ const BookController = {
 
   update: async function(request, response) {
     delete request.body.user_display;
+    if(!request.body.name && request.file){
+      fs.unlinkSync(request.file.path);
+    }
+    if(!request.body.name){return ResponseFail(res, "data error!")}
     request.file ? (request.body.image = request.file.path) : (request.body.image = "")
     let input = {id: request.params.id,
       data: request.body}
+      const data_get = await BookModel.one(input.id);
       const results = await  BookModel.update(input);
-      if(results && request.file){
+      if(!results && request.file){
         fs.unlinkSync(request.file.path);
+      }
+      if(results && data_get[0].image){
+          if(fs.existsSync( data_get[0].image )){
+          fs.unlinkSync(data_get[0].image);
+          }  
       }
     return  response.redirect('/books');
   }
