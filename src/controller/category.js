@@ -1,6 +1,7 @@
 const { v4: uuidv4 } = require('uuid');
 const { BookModel } = require('../../srcAPI/model/book');
-const {CategoryModel} = require("../../srcAPI/model/category")
+const {CategoryModel} = require("../../srcAPI/model/category");
+const { Helper } = require('../helper/checkParams');
 
 const CategoryController = {
   index: async function(request, response) {
