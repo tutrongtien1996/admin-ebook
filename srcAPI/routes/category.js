@@ -4,9 +4,9 @@ const {AuthMiddle} = require('../helper/middleware');
 
 let isAuth = AuthMiddle.isAuth;
 
-CategoryRouter.get('/', isAuth, CategoryController.list)
+CategoryRouter.get('/',  CategoryController.list)
 CategoryRouter.post('/', isAuth, CategoryController.create)
-CategoryRouter.get('/:id', isAuth, CategoryController.one)
+CategoryRouter.get('/:id',  CategoryController.one)
 CategoryRouter.delete('/:id', isAuth, CategoryController.delete)
 CategoryRouter.put('/:id', isAuth, CategoryController.update)
 
