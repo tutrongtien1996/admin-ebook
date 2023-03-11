@@ -1,4 +1,4 @@
-const URL_API = "http://localhost:5506"
+const URL_API = "http://ebook.zeopos.com"
 async function start(){
     let listAuthors = await getAuthors()
     console.log(listAuthors)
@@ -49,8 +49,6 @@ async function getAuthors(){
     let headers = {
         authorization: localStorage.getItem('accessToken')
     }
-    console.log(headers)
-    console.log(URL_API + '/api/users')
     let results =  await axios.get(URL_API + '/api/users', {headers: headers})
                 .then(response => {
                   return response.data.data
