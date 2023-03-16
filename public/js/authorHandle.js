@@ -29,7 +29,7 @@ function changeAuthor(listAuthors){
     let nameElement = document.querySelector("#author_id")
     nameElement.onkeyup = () =>{
         addDataNewAuthor()
-        let newList = listAuthors.filter(author => author.name.toLowerCase().includes(nameElement.value))
+        let newList = listAuthors.filter(author => author.name.toLowerCase().includes(nameElement.value.toLowerCase()))
         let list_author = document.querySelector(".list_author ul")
             let html = ""
         if(newList.length > 0){
