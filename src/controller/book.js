@@ -37,7 +37,7 @@ const BookController = {
     if(!request.body.name && request.file){
       fs.unlinkSync(request.file.path);
     }
-    if(!request.body.name){return ResponseFail(res, "data error!")}
+    if(!request.body.name){return   response.redirect('/books');}
 
     delete input.user_display;
     request.file ? (input.image = request.file.path) : (input.image = "")
@@ -61,7 +61,7 @@ const BookController = {
         fs.unlinkSync(data[0].image);
         } 
     }
-    return  response.redirect('/books');
+    return  response.redirect('/books/form');
   },
 
   formEdit: async function(request, response) {
@@ -77,7 +77,7 @@ const BookController = {
     if(!request.body.name && request.file){
       fs.unlinkSync(request.file.path);
     }
-    if(!request.body.name){return ResponseFail(res, "data error!")}
+    if(!request.body.name){return   response.redirect('/books/form');}
     request.file ? (request.body.image = request.file.path) : (request.body.image = "")
     let input = {id: request.params.id,
       data: request.body}
