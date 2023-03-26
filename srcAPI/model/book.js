@@ -2,17 +2,6 @@ const dotenv = require('dotenv');
 const {db} = require('../common/connectDB');
 
 const BookModel = {
-    list_api: async function(filter){
-        try{
-            let results =  await db('books').select("*", db.raw(
-                "IF(image <> '', IF(LOCATE('http',image) > 0, image, CONCAT('"+process.env.APP_URL+"/', image)), null) as image"
-              )).limit(filter.limit).offset(filter.offset).orderBy('created_at', 'desc');
-            return {results};
-        }
-        catch {
-            return null
-        }
-    },
     list: async function(filter){
         try{
             let count =  await db('books').count('id',{as: 'count'});
