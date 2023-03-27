@@ -1,7 +1,6 @@
 const URL_API = "http://ebook.zeopos.com"
 async function start(){
     let listAuthors = await getAuthors()
-    console.log(listAuthors)
     addDataNewAuthor()
     changeAuthor(listAuthors)
 }

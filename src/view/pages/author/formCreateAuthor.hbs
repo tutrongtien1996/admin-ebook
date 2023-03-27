@@ -1,6 +1,6 @@
 <main>
     <div class="container-fluid px-4">
-        <h1 class="mt-4">Dashboard</h1>
+        <h1 class="mt-4">Author</h1>
         <ol class="breadcrumb mb-4">
             <li class="breadcrumb-item active">Create new author</li>
         </ol>
@@ -17,6 +17,14 @@
                         <input type="text" id="name_template" name="name" class="form-control" value="{{item.name}}">
                         {{else}}
                         <input type="text" id="name_template" name="name" class="form-control" placeholder="Enter author"   value="">
+                        {{/if}}
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Image</label>
+                        {{#if item}}
+                        <input type="text" id="image_template" name="image" class="form-control" value="{{item.image}}">
+                        {{else}}
+                        <input type="text" id="image_template" name="image" class="form-control" placeholder="Enter image"   value="">
                         {{/if}}
                     </div>
                     <div class="row  gx-3">

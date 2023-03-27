@@ -15,6 +15,22 @@ const AuthorController = {
     const results = await  UserModel.one(input);
     return results[0]
   },
+  detail: async function(request, response){
+    var id = "";
+    request.id ? (id = request.id) : (id = request.params.id)
+    let input = {id}
+    const results = await  UserModel.one(input);
+    const listBook = await UserModel.list_book(input);
+    let data = {
+      author: {
+        id: results[0].id,
+        name: results[0].name,
+        image: results[0].image
+      },
+      books: listBook
+    }
+    return response.render('author/author_detail', {data: data})
+  },
 
   formCreate: async function(request, response) {
     response.render('author/formCreateAuthor')
@@ -23,6 +39,7 @@ const AuthorController = {
   store: async function(request, response){
     let input = request.body;
         input.id = uuidv4();
+        console.log(input)
       await UserModel.create(input);
     return  response.redirect('/authors');
   },

@@ -1,0 +1,36 @@
+
+<main>
+    <div class="container-fluid px-4">
+        
+        <div class="card  my-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Author
+                <a href="/authors/form" class="btn btn-sm btn-primary float-end">Add</a>
+            </div>
+            <div class="card-body">
+                <div>
+                    {{#if data}}
+                    <div id="image_title" class="row">
+                        <div class="col-4"><img src="{{data.author.image}}" style="height: 200px"></div>
+                        <div class="col-8">
+                            <ul class="list-unstyled">
+                                <li class="py-1"><strong class="me-1">Name:</strong><p class="d-inline fw-light">{{data.author.name}}</p></li>
+                                <li class="py-1"><strong class="me-1">Id:</strong><p class="d-inline fw-light">{{data.author.id}}</p></li>
+                                <li class="py-1"><strong class="me-1">Books:</strong>
+                                    <ul  class="list-unstyled ms-5">
+                                    {{#each data.books}}
+                                        <li><img src="{{image}}" style="height: 40px" class="my-2">:  {{name}}</li>
+                                    {{/each}}
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    {{/if}}
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</main>
