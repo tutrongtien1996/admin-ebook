@@ -3,7 +3,7 @@
     <div class="container-fluid px-4">
         <h3 class="my-4">Create new category</h3>
         <div class="col-md-12 sol-sm-12">
-            {{#if id}}
+            {{#if data}}
             <form action="/categories/edit/{{id}}" method="post">
             {{else}}
             <form action="/categories/form" method="post">
@@ -11,7 +11,22 @@
                 <fieldset>
                     <div class="mb-3">
                         <label class="form-label">Name</label>
-                        <input type="text" id="name_template" name="name" class="form-control" >
+                        {{#if data}}
+                        <input type="text" id="name_template" name="name" class="form-control shadow-none" value="{{data.name}}">
+                        {{else}}
+                        <input type="text" id="name_template" name="name" class="form-control shadow-none" >
+                        {{/if}}
+                        
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Image</label>
+                        {{#if data}}
+                        <input type="text" id="image_template" name="image" class="form-control shadow-none" value="{{data.image}}">
+                        {{else}}
+                        <input type="text" id="image_template" name="image" class="form-control shadow-none">
+                        {{/if}}
+                        
+                        
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
                 </fieldset>

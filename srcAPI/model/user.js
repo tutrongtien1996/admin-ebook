@@ -21,6 +21,16 @@ const UserModel = {
         }
     },
 
+    list_book: async function(input){
+        try{
+            let results =  await db('books').select('*').where('user_id', input.id);
+            return results;
+        }
+        catch {
+            return null
+        }
+    },
+
     one: async function(input){
         try{
             let results = await db('users').select('*').where('id', input.id);

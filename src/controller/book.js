@@ -61,7 +61,7 @@ const BookController = {
         fs.unlinkSync(data[0].image);
         } 
     }
-    return  response.redirect('/books/form');
+    return  response.redirect('/books');
   },
 
   formEdit: async function(request, response) {
@@ -78,18 +78,18 @@ const BookController = {
       fs.unlinkSync(request.file.path);
     }
     if(!request.body.name){return   response.redirect('/books/form');}
-    request.file ? (request.body.image = request.file.path) : (request.body.image = "")
     let input = {id: request.params.id,
       data: request.body}
-      const data_get = await BookModel.one(input.id);
+      const data_get = await BookModel.one(input);
       if(!data_get){
         return  response.redirect('/books');
       }
+      request.file ? (request.body.image = request.file.path) : (request.body.image = data_get[0].image)
       const results = await  BookModel.update(input);
       if(!results && request.file){
         fs.unlinkSync(request.file.path);
       }
-      if(results && data_get[0].image){
+      if(results && data_get[0].image && request.file){
           if(fs.existsSync( data_get[0].image )){
           fs.unlinkSync(data_get[0].image);
           }  

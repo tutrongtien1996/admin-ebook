@@ -13,7 +13,7 @@ const CategoryModel = {
     
     create: async function(input){
         try{
-            await db('categories').insert({id: input.id, name: input.name})
+            await db('categories').insert({id: input.id, name: input.name, image: input.image})
             return true;
         }
         catch {
@@ -42,7 +42,7 @@ const CategoryModel = {
    
     update: async function(input){
         try{
-            let results = await db('categories').where('id', input.id).update({name: input.name})
+            let results = await db('categories').where('id', input.id).update({name: input.name, image: input.image})
             return results;
         }
         catch {

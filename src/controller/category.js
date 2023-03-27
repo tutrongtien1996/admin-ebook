@@ -16,7 +16,8 @@ const CategoryController = {
   store: async function(request, response){
     let input = {
       id: uuidv4(),
-      name: request.body.name
+      name: request.body.name,
+      image: request.body.image
   }
     await CategoryModel.create(input);
     return  response.redirect('/categories');
@@ -51,13 +52,16 @@ const CategoryController = {
   },
 
   formEdit: async function(request, response) {
-    let {id} = request.params
-    response.render('category/formCategory', {id})
+    let {id} = request.params;
+    let input = {id}
+    let results = await CategoryModel.one(input);
+    response.render('category/formCategory', {data: results[0]})
   },
 
   update: async function(request, response) {
     let input = {id: request.params.id,
-      name: request.body.name}
+      name: request.body.name,
+      image: request.body.image}
       await  CategoryModel.update(input);
     return  response.redirect('/categories');
   }
