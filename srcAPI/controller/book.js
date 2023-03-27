@@ -5,7 +5,14 @@ const fs = require('fs')
 
 const BookController = {
     list: async (req, res) => {
-        const results = await  BookModel.list_api();
+        let params = req.query
+        if (!params.limit) {
+            params.limit = 20
+        }
+        if (!params.offset) {
+            params.offset = 0
+        }
+        const results = await  BookModel.list(params);
         return (results ? ResponseSuccess(res, "", results) : ResponseFail(res, "data not exist!"))
     },
     create: async (request, res) => {

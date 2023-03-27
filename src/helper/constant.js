@@ -1,4 +1,2 @@
-const constants = {
-    EBOOK_URL: "http://127.0.0.1:3022",
-}
+const constants = {}
 module.exports = {constants}
