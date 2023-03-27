@@ -28,7 +28,7 @@ const BookModel = {
     one: async function(input){
         try{
             let results = await db('books').select('books.id', 'books.name', 'books.category_id', 'books.user_id', 'books.image', 'books.audio_url', 'books.description', 'books.youtube_id', 'books.chanel_video', 'categories.name as category_name', 'users.name as author_name', db.raw(
-                "IF(image <> '', IF(LOCATE('http',image) > 0, image, CONCAT('"+process.env.APP_URL+"/', image)), null) as image"
+                "IF(books.image <> '', IF(LOCATE('http',books.image) > 0, books.image, CONCAT('"+process.env.APP_URL+"/', books.image)), null) as image"
               ))
             .leftJoin('categories', 'books.category_id', 'categories.id').leftJoin('users', 'books.user_id', 'users.id').where('books.id', input.id);
             return results;
@@ -40,7 +40,7 @@ const BookModel = {
     detail: async function(input){
         try{
             let results = await db('books').select('books.id', 'books.name', 'books.category_id', 'books.user_id', 'categories.name as category_name', 'users.name as author_name', db.raw(
-                "IF(image <> '', IF(LOCATE('http',image) > 0, image, CONCAT('"+process.env.APP_URL+"/', image)), null) as image"
+                "IF(books.image <> '', IF(LOCATE('http',books.image) > 0, books.image, CONCAT('"+process.env.APP_URL+"/', books.image)), null) as image"
               ))
             .leftJoin('categories', 'books.category_id', 'categories.id').leftJoin('users', 'books.user_id', 'users.id').where('books.category_id', input.id);
             return results;

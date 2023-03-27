@@ -8,6 +8,7 @@ const { _initRoute } = require('./src/route/_init');
 const { _initRouteAPI } = require('./srcAPI/routes/init.js');
 const { ConfigSession } = require('./src/helper/config');
 dotenv.config();
+const path = require('path')
 
 const app = express();
 app.use(cors())
@@ -24,6 +25,8 @@ app.engine('hbs', exphbs.engine({
 }))
 app.use('/public', express.static('public'))
 app.use('/upload', express.static('upload'))
+// app.use('/upload', express.static(path.join(__dirname, 'upload')))
+
 app.set('view engine', 'hbs')
 app.set('views',__dirname + '/src/view/pages');
 ConfigSession(app)

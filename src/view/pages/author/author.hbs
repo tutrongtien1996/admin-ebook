@@ -11,7 +11,8 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr class="row">
-                            <th class ="col-3   bg-info">Name</th>
+                            <th class="col-1">Image</th>
+                            <th class ="col-2   bg-info">Name</th>
                             <th class="col-6">Channel Url</th>
                             <th class="col-3" style="width: 16.66%">Action</th>
                         </tr>
@@ -19,10 +20,11 @@
                     <tbody>
                         {{#each items}}
                         <tr class="row">
-                            <td class="col-3">{{name}}</td>
+                            <td style="col-1"><img src="{{image}}" alt="image"></td>
+                            <td class="col-2">{{name}}</td>
                             <td class="col-6">{{chanel_url}}</td>
                             <td class="col-3" style="width: 16.66%">
-                                <a href="#" class="btn btn-sm btn-primary">View</a>
+                                <a href="/authors/details/{{id}}" class="btn btn-sm btn-primary">View</a>
                                 <a  href="/authors/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>
                                 <a href="/authors/delete/{{id}}" class="btn btn-sm btn-danger">Delete</a>
                             </td>
