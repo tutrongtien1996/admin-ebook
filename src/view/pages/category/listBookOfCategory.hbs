@@ -12,6 +12,7 @@
                 <table id="datatablesSimple">
                     <thead>
                         <tr>
+                            <th>Img</th>
                             <th>Name</th>
                             <th>Author</th>
                             <th>Action</th>
@@ -20,6 +21,7 @@
                     <tbody>
                         {{#each items.results}}
                         <tr>
+                            <td style=""><img src="{{image}}" alt="image" width="40px"></td>
                             <td>{{name}}</td>
                             <td>{{author_name}}</td>
                             <td>
