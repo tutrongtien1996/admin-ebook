@@ -1,7 +1,7 @@
 
 <main>
     <div class="container-fluid px-4">
-        <h3 class="mt-4 text-info">Create new Book</h3>
+        <h3 class="mt-4 text-info">{{#if book}}Edit{{else}}Create new Book{{/if}}</h3>
         <div class="col-md-12 sol-sm-12">
             {{#if book}}
             <form action="/books/edit/{{book.id}}" method="post" enctype="multipart/form-data">
@@ -9,6 +9,14 @@
             <form action="/books/form" method="post" enctype="multipart/form-data">
             {{/if}}
                 <div class="row  gx-3">
+                    <div><label for="url_id" class="form-label">URL:</label></div>
+                        <div class="input-group mb-3"> 
+                        <input type="text" class="form-control shadow-none" placeholder="Enter URL here"  autocomplete="off" aria-describedby="basic-addon2">
+                            <input type="text" name="url_id" class="d-none shadow-none">
+                            <div class="input-group-append">
+                                <span class="input-group-text" id="basic-addon2" role="button">Search</span>
+                        </div>
+                    </div>
                     <div class="mb-3 col">
                         <label for="name" class="form-label">Name:</label>
                         {{#if book}}
