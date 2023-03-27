@@ -22,12 +22,12 @@
                     <div class="row  gx-3">
                         <div class="mb-3 col">
                             <label for="chanel_id" class="form-label"> Chanel id:</label>
-                            <input type="text" class="form-control" id="chanel_id"  {{#if item.chanel_id}} placeholder="{{item.chanel_id}}" {{else}} placeholder="Enter chanel id" {{/if}} name="chanel_id">
+                            <input type="text" class="form-control" id="chanel_id"  {{#if item.chanel_id}} value="{{item.chanel_id}}" {{else}} placeholder="Enter chanel id" {{/if}} name="chanel_id">
                         </div>
                     
                         <div class="mb-3 col">
                             <label for="chanel_url" class="form-label">Chanel URL:</label>
-                            <input type="text" class="form-control" id="chanel_url" {{#if item.chanel_url}} placeholder="{{item.chanel_url}}" {{else}} placeholder="Enter chanel url" {{/if}} name="chanel_url">
+                            <input type="text" class="form-control" id="chanel_url" {{#if item.chanel_url}} value="{{item.chanel_url}}" {{else}} placeholder="Enter chanel url" {{/if}} name="chanel_url">
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary">Submit</button>
