@@ -39,7 +39,6 @@ const AuthorController = {
   store: async function(request, response){
     let input = request.body;
         input.id = uuidv4();
-        console.log(input)
       await UserModel.create(input);
     return  response.redirect('/authors');
   },
