@@ -4,7 +4,7 @@
         <h3 class="my-4">Create new category</h3>
         <div class="col-md-12 sol-sm-12">
             {{#if data}}
-            <form action="/categories/edit/{{id}}" method="post">
+            <form action="/categories/edit/{{data.id}}" method="post">
             {{else}}
             <form action="/categories/form" method="post">
             {{/if}}
