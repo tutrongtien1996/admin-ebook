@@ -14,16 +14,15 @@ const BookController = {
     data.results.forEach(element => {
       if(element.description){
         element.description = element.description.slice(0, 150) + "..."
-
       }
     });
-    data.pages = Helper.pages(data.count);
+    data.pages = Helper.pages(query_filter.limit, data.count);
     let accessToken = request.session.user.accessToken
-    response.render('book/book', {accessToken, items: data});
+    response.render('book/index', {accessToken, items: data});
   },
   one: async function(request, response) {
     const input = {id: request.params.id}
-    let result = await BookModel.one(input)
+    let result = await BookModel.detail(input)
     response.render('book/viewBook', {item: result[0]});
   },
   formCreate: async function(request, response) {
@@ -51,7 +50,7 @@ const BookController = {
 
   delete: async function(request, response){
     let input = {id: request.params.id}
-    const data = await  BookModel.one(input);
+    const data = await  BookModel.detail(input);
     if(!data){
       return  response.redirect('/books');
     }
@@ -68,7 +67,7 @@ const BookController = {
     request.url_create_book = "formCreateBook"
     let categories = await CategoryController.index(request, response)
     const input = {id: request.params.id}
-    let book_data = await BookModel.one(input)
+    let book_data = await BookModel.detail(input)
     response.render('book/formCreateBook', {categories, book: book_data[0]});
   },
 
@@ -80,7 +79,7 @@ const BookController = {
     if(!request.body.name){return   response.redirect('/books/form');}
     let input = {id: request.params.id,
       data: request.body}
-      const data_get = await BookModel.one(input);
+      const data_get = await BookModel.detail(input);
       if(!data_get){
         return  response.redirect('/books');
       }

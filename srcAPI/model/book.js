@@ -1,14 +1,40 @@
-const dotenv = require('dotenv');
 const {db} = require('../common/connectDB');
 
 const BookModel = {
     list: async function(filter){
         try{
-            let count =  await db('books').count('id',{as: 'count'});
-            let results =  await db('books').select("*", db.raw(
-                "IF(image <> '', IF(LOCATE('http',image) > 0, image, CONCAT('"+process.env.APP_URL+"/', image)), null) as image"
-              )).limit(filter.limit).offset(filter.offset).orderBy('created_at', 'desc');
-            return {results, count: count[0].count};
+            let query = db('books').clone().orderBy('created_at', 'desc');
+            if (filter.category_id) {
+                query = query.where("category_id", "=", filter.category_id);
+            }
+            if (filter.user_id) {
+                query = query.where("user_id", "=", filter.user_id);
+            }
+            if (filter.keyword) {
+                query = query.where("books.name", "LIKE", `%${filter.keyword}%`);
+            }
+
+            let countQuery = query.clone().count("* as count");
+            let resultQuery = query.clone()
+            .select('books.*', db.raw(
+                "IF(books.image <> '', IF(LOCATE('http', books.image) > 0, books.image, CONCAT('" + process.env.APP_URL + "/', books.image)), null) as image"
+                ), 
+                'categories.id as category_id',
+                'categories.name as category_name',
+                'categories.image as category_image',
+                'users.id as user_id',
+                'users.name as user_name',
+                'users.image as user_image'
+            )
+            .leftJoin('categories', 'books.category_id', 'categories.id')
+            .leftJoin('users', 'books.user_id', 'users.id')
+            if (filter.limit != -1) {
+                resultQuery = resultQuery.limit(filter.limit)
+                .offset(filter.offset);
+            }
+            let [{ count }] = await countQuery;
+            let results = await resultQuery;
+            return { results, count: count };
         }
         catch {
             return null
@@ -25,24 +51,12 @@ const BookModel = {
         }
     },
 
-    one: async function(input){
+    detail: async function(input){
         try{
             let results = await db('books').select('books.id', 'books.name', 'books.category_id', 'books.user_id', 'books.image', 'books.audio_url', 'books.description', 'books.youtube_id', 'books.chanel_video', 'categories.name as category_name', 'users.name as author_name', db.raw(
                 "IF(books.image <> '', IF(LOCATE('http',books.image) > 0, books.image, CONCAT('"+process.env.APP_URL+"/', books.image)), null) as image"
               ))
             .leftJoin('categories', 'books.category_id', 'categories.id').leftJoin('users', 'books.user_id', 'users.id').where('books.id', input.id);
-            return results;
-        }
-        catch {
-            return null
-        }
-    },
-    detail: async function(input){
-        try{
-            let results = await db('books').select('books.id', 'books.name', 'books.category_id', 'books.user_id', 'categories.name as category_name', 'users.name as author_name', db.raw(
-                "IF(books.image <> '', IF(LOCATE('http',books.image) > 0, books.image, CONCAT('"+process.env.APP_URL+"/', books.image)), null) as image"
-              ))
-            .leftJoin('categories', 'books.category_id', 'categories.id').leftJoin('users', 'books.user_id', 'users.id').where('books.category_id', input.id);
             return results;
         }
         catch {

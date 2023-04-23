@@ -1,28 +1,29 @@
 const Helper =  {
-    filter: {  
-        limit: 5, //số lượng orders trên mỗi trang: mặc định 20
-        offset: 0, //vị trí đầu tiên trong danh sách order của mỗi trang, (trạng hiện tại - 1)*limit
-    },
     setFilter: (input) => {
+        var filter = {}
         var page = input.page
         if(!Number(page) && page){
-            Helper.filter.limit = 0;
-            return Helper.filter
+            filter.limit = 0;
         }
         if (page == null) {
             page = 1;
         }
         
         if(Number(page) <= 0 || (Number(page) - Math.floor(Number(page))) != 0){
-            Helper.filter.limit = 0;
-            return Helper.filter
+            filter.limit = 0;
         }
-        Helper.filter.offset = (Helper.filter.limit) * (Number(page) - 1); 
-        return Helper.filter
+        if (input.category_id) {
+            filter.category_id = input.category_id
+        }
+        if (input.user_id) {
+            filter.user_id = input.user_id
+        }
+        filter.offset = (filter.limit) * (Number(page) - 1);
+        return filter
     },
-    pages: (count) => {
-        if(Helper.filter.limit){
-            let countPages = (count / Helper.filter.limit) + 1;
+    pages: (limit, count) => {
+        if(limit){
+            let countPages = (count / limit) + 1;
             return Array.from({length: countPages}, (_, i) => i + 1)
         }
        return []

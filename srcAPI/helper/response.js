@@ -16,4 +16,23 @@ function ResponseFail(res, message, data=null) {
         data: data,
     }))
 }
-module.exports = {ResponseSuccess, ResponseFail}
+function getResponse(currentPage, totalItems, limit, items) {
+    let totalPages = 1
+    if(limit && limit != -1){
+        totalPages = parseInt((totalItems / limit) + 1);
+    }
+    if (limit == -1) {
+        totalPages = 1
+    }
+    let response = {
+        items: items,
+        pagination: {
+            total_items: totalItems,
+            total_pages: totalPages,
+            current_page: currentPage,
+            next_page: currentPage >= totalPages ? null : currentPage + 1
+        }
+    }
+    return response
+}
+module.exports = {ResponseSuccess, ResponseFail, getResponse}

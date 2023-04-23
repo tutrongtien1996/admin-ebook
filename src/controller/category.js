@@ -1,7 +1,6 @@
 const { v4: uuidv4 } = require('uuid');
 const { BookModel } = require('../../srcAPI/model/book');
 const {CategoryModel} = require("../../srcAPI/model/category");
-const { Helper } = require('../helper/checkParams');
 
 const CategoryController = {
   index: async function(request, response) {
@@ -33,15 +32,12 @@ const CategoryController = {
   detail: async function(request, response) {
     var id = "";
     request.id ? (id = request.id) : (id = request.params.id);
-    let input = {id}
-    let results = await BookModel.detail(input);
-    let items = {
-      results
+    let input = {
+      category_id: id,
+      limit: -1
     }
-    if(results.length > 0){
-      items.category = results[0].category_name
-    }
-    return response.render('category/listBookOfCategory', {items: items});
+    let dataBook = await BookModel.list(input);
+    return response.render('book/index', {items: dataBook});
   },
 
   delete: async function(request, response){
