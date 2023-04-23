@@ -1,11 +1,12 @@
 const {UserModel} = require('../model/user')
-const {ResponseSuccess, ResponseFail} = require('../helper/response')
+const {ResponseSuccess, ResponseFail, getResponse} = require('../helper/response')
 const { v4: uuidv4 } = require('uuid');
 
 const UserController = {
     list: async (req, res) => {
         const results = await  UserModel.list();
-        return (results ? ResponseSuccess(res, "", results) : ResponseFail(res, "data not exist!"))
+        let response = getResponse(1, results.length, -1, results)
+        return (results ? ResponseSuccess(res, "", response) : ResponseFail(res, "data not exist!"))
     },
     create: async (req, res) => {
         let input = req.body;

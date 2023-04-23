@@ -3,7 +3,10 @@ const {db} = require('../common/connectDB')
 const UserModel = {
     list: async function(){
         try{
-            let results =  await db('users').select('*');
+            let results =  await await db('users')
+            .select('users.id', 'users.name', 'users.image', db.raw('COUNT(*) as total_books'))
+            .leftJoin('books', 'users.id', 'books.user_id')
+            .groupBy('users.id')
             return results;
         }
         catch {

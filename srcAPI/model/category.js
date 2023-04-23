@@ -3,7 +3,10 @@ const {db} = require('../common/connectDB')
 const CategoryModel = {
     list: async function(){
         try{
-            let results =  await db('categories').select('*');
+            let results =  await db('categories')
+            .select('categories.id', 'categories.name', 'categories.image', db.raw('COUNT(*) as total_books'))
+            .leftJoin('books', 'categories.id', 'books.category_id')
+            .groupBy('categories.id');
             return results;
         }
         catch {
