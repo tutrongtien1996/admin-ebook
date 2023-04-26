@@ -54,6 +54,7 @@ const UserModel = {
     },
    
     update: async function(input){
+        console.log(input)
         try{
             let results = await db('users').where('id', input.id).update(input.data)
             return results;

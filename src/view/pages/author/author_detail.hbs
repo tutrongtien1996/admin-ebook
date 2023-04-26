@@ -20,7 +20,7 @@
                                 <li class="py-1"><strong class="me-1">Books:</strong>
                                     <ul  class="list-unstyled ms-5">
                                     {{#each data.books}}
-                                        <li><img src="{{image}}" style="height: 40px" class="my-2">:  {{name}}</li>
+                                        <a href="/books/one/{{id}}" style="text-decoration: none; color: rgb(29, 29, 29)"><li><img src="{{image}}" style="height: 40px" class="my-2">  {{name}}</li></a>
                                     {{/each}}
                                     </ul>
                                 </li>

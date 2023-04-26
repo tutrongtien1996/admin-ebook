@@ -85,9 +85,9 @@ const BookController = {
         return  response.redirect('/books');
       }
       request.file ? (input.data.image = request.file.path) : (input.data.image = input.data.image_link)
-      input.id = uuidv4();
       delete input.data.image_link;
-      const results = await  BookModel.update(input);
+      let results = await  BookModel.update(input);
+      
       if(!results && request.file){
         fs.unlinkSync(request.file.path);
       }

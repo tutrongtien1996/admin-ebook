@@ -82,7 +82,7 @@ const BookModel = {
    
     update: async function(input){
         try{
-            let results = await db('books').where('id', input.id).update(input.data)
+            await db('books').where('id', input.id).update(input.data)
             return true;
         }
         catch {
