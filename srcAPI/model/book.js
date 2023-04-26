@@ -53,9 +53,16 @@ const BookModel = {
 
     detail: async function(input){
         try{
-            let results = await db('books').select('books.id', 'books.name', 'books.category_id', 'books.user_id', 'books.image', 'books.audio_url', 'books.description', 'books.youtube_id', 'books.chanel_video', 'categories.name as category_name', 'users.name as author_name', db.raw(
-                "IF(books.image <> '', IF(LOCATE('http',books.image) > 0, books.image, CONCAT('"+process.env.APP_URL+"/', books.image)), null) as image"
-              ))
+            let results = await db('books').select('books.*', db.raw(
+                "IF(books.image <> '', IF(LOCATE('http', books.image) > 0, books.image, CONCAT('" + process.env.APP_URL + "/', books.image)), null) as image"
+                ), 
+                'categories.id as category_id',
+                'categories.name as category_name',
+                'categories.image as category_image',
+                'users.id as user_id',
+                'users.name as user_name',
+                'users.image as user_image'
+            )
             .leftJoin('categories', 'books.category_id', 'categories.id').leftJoin('users', 'books.user_id', 'users.id').where('books.id', input.id);
             return results;
         }

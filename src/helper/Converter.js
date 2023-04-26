@@ -9,6 +9,8 @@ const Converter =  {
                 description: item.description,
                 image: item.image,
                 audio_url: item.audio_url,
+                count_view: item.count_view,
+                count_rate:  item.count_rate,
                 youtube_id: item.youtube_id,
                 chanel_video: item.chanel_video,
                 created_at: item.created_at,

@@ -54,7 +54,35 @@ const BookController = {
     one: async (req, res) => {
         let input = {id: req.params.id}
         const results = await  BookModel.detail(input);
-        return (results ? ResponseSuccess(res, "", results[0]) : ResponseFail(res, "data not exist!"))
+        if(results.length > 0){
+            let item = {
+                id: results[0].id,
+                name: results[0].name,
+                count_view: results[0].count_view,
+                count_rate: results[0].count_rate,
+                description: results[0].description,
+                image: results[0].image,
+                audio_url: results[0].audio_url,
+                youtube_id: results[0].youtube_id,
+                chanel_video: results[0].chanel_video,
+                created_at: results[0].created_at,
+                updated_at: results[0].updated_at,
+                user: {
+                    id: results[0].user_id,
+                    name: results[0].user_name,
+                    image: results[0].user_image
+                },
+                category: {
+                    id: results[0].category_id,
+                    name: results[0].category_name,
+                    image: results[0].category_image
+                }
+            }
+            input.data = {count_view : Number(item.count_view) + 1}
+            await  BookModel.update(input)
+            return ResponseSuccess(res, "", item) 
+        }
+        return  ResponseFail(res, "data not exist!")
     }
     ,
     delete: async (req, res) => {
