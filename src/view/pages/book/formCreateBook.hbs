@@ -29,9 +29,11 @@
                 </div>
                 <div class="row gx-3">
                     <div class="mb-3 col">
+                         {{#if book}}
+                            <div id="category_none" data-category="{{book.category_id}}" class="d-none"></div>
+                        {{/if}}
                         <label for="category_id" class="form-label">Categories:</label>
                         <select class="form-select shadow-none" id="category_id" aria-label="Default select example" name="category_id">
-                            <option value="1">Select category</option>
                             {{#each categories}}
                             <option value="{{id}}" class="border-bottom">{{name}}</option>
                             {{/each}}
@@ -39,9 +41,10 @@
                     </div>
                     <div class="col position-relative">
                         <div><label for="author_id" class="form-label">Author:</label></div>
+        
                         <div class="input-group mb-3"> 
                         {{#if book}}
-                            <input type="text" class="form-control shadow-none" placeholder="Enter Author here" name="user_display" id="author_id" value="{{book.author_name}}" autocomplete="off" aria-describedby="basic-addon2">
+                            <input type="text" class="form-control shadow-none" placeholder="Enter Author here" name="user_display" id="author_id" value="{{book.user_name}}" autocomplete="off" aria-describedby="basic-addon2">
                         {{else}}
                             <input type="text" class="form-control shadow-none" placeholder="Enter Author here" name="user_display" id="author_id" autocomplete="off" aria-describedby="basic-addon2">
                         {{/if}}
@@ -58,6 +61,14 @@
                         <label for="image" class="form-label">Image</label>
                         <input class="form-control shadow-none" type="file" id="image" accept="image/png, image/jpeg" name="image">
                     </div>
+                </div>
+                <div class="mb-3">  
+                    <label for="image_link" class="form-label">Image link</label>
+                    {{#if book}}
+                        <input type="text" class="form-control shadow-none" id="image_link" placeholder="Enter image link..." name="image_link" value="{{book.image}}">
+                    {{else}}
+                        <input type="text" class="form-control shadow-none" id="image_link" placeholder="Enter image link..." name="image_link">
+                    {{/if}}
                 </div>
             
                 <div class="mb-3">  

@@ -3,6 +3,7 @@ async function start(){
     let listAuthors = await getAuthors()
     addDataNewAuthor()
     changeAuthor(listAuthors)
+    activeCategory()
 }
 start()
 
@@ -50,7 +51,7 @@ async function getAuthors(){
     }
     let results =  await axios.get(URL_API + '/api/users', {headers: headers})
                 .then(response => {
-                  return response.data.data
+                  return response.data.data.items
                 })
     return results
 }
@@ -68,4 +69,16 @@ function getValueAuthor(){
         })
     }
 
+}
+
+function activeCategory(){
+    let book = document.querySelector("#category_none");
+    let listCategories = document.querySelectorAll("select option");
+    if(book){
+        listCategories.forEach(item => {
+            if(item.value == book.getAttribute("data-category")){
+                item.selected = "selected"
+            }
+        })
+    }
 }

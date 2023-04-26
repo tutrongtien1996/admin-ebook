@@ -39,8 +39,9 @@ const BookController = {
     if(!request.body.name){return   response.redirect('/books');}
 
     delete input.user_display;
-    request.file ? (input.image = request.file.path) : (input.image = "")
+    request.file ? (input.image = request.file.path) : (input.image = input.image_link)
     input.id = uuidv4();
+    delete input.image_link;
     const results = await BookModel.create(input);
     if(!results && request.file){
       fs.unlinkSync(request.file.path);
@@ -78,12 +79,14 @@ const BookController = {
     }
     if(!request.body.name){return   response.redirect('/books/form');}
     let input = {id: request.params.id,
-      data: request.body}
+      data: JSON.parse(JSON.stringify(request.body))}
       const data_get = await BookModel.detail(input);
       if(!data_get){
         return  response.redirect('/books');
       }
-      request.file ? (request.body.image = request.file.path) : (request.body.image = data_get[0].image)
+      request.file ? (input.data.image = request.file.path) : (input.data.image = input.data.image_link)
+      input.id = uuidv4();
+      delete input.data.image_link;
       const results = await  BookModel.update(input);
       if(!results && request.file){
         fs.unlinkSync(request.file.path);
