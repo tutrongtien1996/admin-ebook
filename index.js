@@ -4,11 +4,11 @@ const dotenv = require('dotenv');
 const exphbs = require('express-handlebars');
 const bodyParser = require('body-parser');
 const cookieParser = require("cookie-parser");
-const { _initRoute } = require('./src/route/_init');
-const { _initRouteAPI } = require('./srcAPI/routes/init.js');
 const { ConfigSession } = require('./src/helper/config');
 dotenv.config();
-const path = require('path')
+
+const { _initRouteAdmin } = require('./src/route/admin');
+const { _initRouteAPI } = require('./src/route/api');
 
 const app = express();
 app.use(cors())
@@ -25,12 +25,11 @@ app.engine('hbs', exphbs.engine({
 }))
 app.use('/public', express.static('public'))
 app.use('/upload', express.static('upload'))
-// app.use('/upload', express.static(path.join(__dirname, 'upload')))
 
 app.set('view engine', 'hbs')
 app.set('views',__dirname + '/src/view/pages');
 ConfigSession(app)
-_initRoute(app)
+_initRouteAdmin(app)
 _initRouteAPI(app)
 
 

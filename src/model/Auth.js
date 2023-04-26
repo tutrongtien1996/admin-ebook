@@ -1,4 +1,4 @@
-const {db} = require('../common/connectDB')
+const {db} = require('../helper/connectDB')
 const AuthModel = {
     getUser: async username => {
         try {
@@ -17,7 +17,6 @@ const AuthModel = {
         }
     },
     updateToken: async function(input){
-        console.log(db('admins').where('id', input.id).update('refreshToken', input.refreshToken).toString())
         try{
             let results = await db('admins').where('id', input.id).update('refreshToken', input.refreshToken)
             return results;

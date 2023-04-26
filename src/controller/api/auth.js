@@ -1,6 +1,6 @@
-const {AuthModel} = require('../model/Auth')
-const {ResponseSuccess, ResponseFail} = require('../helper/response')
-const {jwtHandle} = require('../helper/handlePackage')
+const {AuthModel} = require('../../model/Auth')
+const {ResponseSuccess, ResponseFail} = require('../../helper/response')
+const {jwtHandle} = require('../../helper/handlePackage')
 const randtoken = require('rand-token')
 const { v4: uuidv4 } = require('uuid');
 const dotenv = require('dotenv').config();

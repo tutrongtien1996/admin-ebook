@@ -1,8 +1,8 @@
 
 const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
-const {BookModel} = require('../../srcAPI/model/book');
-const { Helper } = require('../helper/checkParams');
+const {BookModel} = require('../../model/book');
+const { Helper } = require('../../helper/checkParams');
 const {CategoryController} = require('./category')
 
 

@@ -1,12 +1,9 @@
-const {db} = require('../common/connectDB')
+const {db} = require('../helper/connectDB')
 
-const UserModel = {
+const RateModel = {
     list: async function(){
         try{
-            let results =  await await db('users')
-            .select('users.id', 'users.name', 'users.image', db.raw('COUNT(*) as total_books'))
-            .leftJoin('books', 'users.id', 'books.user_id')
-            .groupBy('users.id')
+            let results =  await db('rates').select('*')
             return results;
         }
         catch {
@@ -16,27 +13,25 @@ const UserModel = {
     
     create: async function(input){
         try{
-            await db('users').insert(input)
+            await db('rates').insert(input)
             return true;
         }
         catch {
             return null
         }
     },
-
-    list_book: async function(input){
+    device_id: async function(input){
         try{
-            let results =  await db('books').select('*').where('user_id', input.id);
+            let results = await db('rates').select('*').where('device_id', input.device_id);
             return results;
         }
         catch {
             return null
         }
     },
-
     one: async function(input){
         try{
-            let results = await db('users').select('*').where('id', input.id);
+            let results = await db('rates').select('*').where('id', input.id);
             return results;
         }
         catch {
@@ -45,7 +40,7 @@ const UserModel = {
     },
     delete: async function(input){
         try{
-            let results = await db('users').where('id', input.id).del()
+            let results = await db('rates').where('id', input.id).andWhere('device_id', input.data.device_id).del()
             return results;
         }
         catch {
@@ -54,9 +49,8 @@ const UserModel = {
     },
    
     update: async function(input){
-        console.log(input)
         try{
-            let results = await db('users').where('id', input.id).update(input.data)
+            let results = await db('rates').where('id', input.id).andWhere('device_id', input.data.device_id).update(input.data)
             return results;
         }
         catch {
@@ -65,4 +59,4 @@ const UserModel = {
     }
 }
 
-module.exports = {UserModel}
+module.exports = {RateModel}

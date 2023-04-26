@@ -1,4 +1,4 @@
-const {db} = require('../common/connectDB');
+const {db} = require('../helper/connectDB');
 
 const BookModel = {
     list: async function(filter){
@@ -28,7 +28,7 @@ const BookModel = {
             )
             .leftJoin('categories', 'books.category_id', 'categories.id')
             .leftJoin('users', 'books.user_id', 'users.id')
-            if (filter.limit != -1) {
+            if (filter.limit != -1 && filter.limit != undefined) {
                 resultQuery = resultQuery.limit(filter.limit)
                 .offset(filter.offset);
             }

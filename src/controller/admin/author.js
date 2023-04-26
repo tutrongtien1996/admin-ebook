@@ -1,5 +1,5 @@
 
-const {UserModel} = require("../../srcAPI/model/user")
+const {UserModel} = require("../../model/user")
 const { v4: uuidv4 } = require('uuid');
 
 

@@ -1,5 +1,5 @@
 
-const { AuthAPIController } = require("../../srcAPI/controller/auth");
+const { AuthAPIController } = require("../api/auth");
 
 
 

@@ -1,4 +1,4 @@
-const {db} = require('../common/connectDB')
+const {db} = require('../helper/connectDB')
 
 const CategoryModel = {
     list: async function(){

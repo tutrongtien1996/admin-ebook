@@ -1,5 +1,5 @@
-const {CategoryModel} = require('../model/category')
-const {ResponseSuccess, ResponseFail, getResponse} = require('../helper/response')
+const {CategoryModel} = require('../../model/category')
+const {ResponseSuccess, ResponseFail, getResponse} = require('../../helper/response')
 const { v4: uuidv4 } = require('uuid');
 
 const CategoryController = {

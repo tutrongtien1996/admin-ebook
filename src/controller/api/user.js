@@ -1,5 +1,5 @@
-const {UserModel} = require('../model/user')
-const {ResponseSuccess, ResponseFail, getResponse} = require('../helper/response')
+const {UserModel} = require('../../model/user')
+const {ResponseSuccess, ResponseFail, getResponse} = require('../../helper/response')
 const { v4: uuidv4 } = require('uuid');
 
 const UserController = {

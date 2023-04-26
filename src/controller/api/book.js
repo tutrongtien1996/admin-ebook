@@ -1,9 +1,9 @@
-const {BookModel} = require('../model/book')
-const {ResponseSuccess, ResponseFail, getResponse} = require('../helper/response')
+const {BookModel} = require('../../model/book')
+const {ResponseSuccess, ResponseFail, getResponse} = require('../../helper/response')
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
-const { Helper } = require('../../src/helper/checkParams');
-const { Converter } = require('../../src/helper/Converter');
+const { Helper } = require('../../helper/checkParams');
+const { Converter } = require('../../helper/Converter');
 
 const BookController = {
     list: async (req, res) => {

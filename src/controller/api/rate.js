@@ -1,7 +1,7 @@
-const {RateModel} = require('../model/rate')
-const {ResponseSuccess, ResponseFail} = require('../helper/response')
+const {RateModel} = require('../../model/rate')
+const {ResponseSuccess, ResponseFail} = require('../../helper/response')
 const { v4: uuidv4 } = require('uuid');
-const { getErrors } = require('../helper/rateValidate');
+const { getErrors } = require('../../helper/rateValidate');
 
 const RateController = {
     list: async (req, res) => {
