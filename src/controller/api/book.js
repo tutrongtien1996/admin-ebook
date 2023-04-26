@@ -2,32 +2,12 @@ const {BookModel} = require('../../model/book')
 const {ResponseSuccess, ResponseFail, getResponse} = require('../../helper/response')
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
-const { Helper } = require('../../helper/checkParams');
 const { Converter } = require('../../helper/Converter');
+const { BookList } = require('../request/book');
 
 const BookController = {
     list: async (req, res) => {
-        let query = req.query
-        let params = {
-            page: 1,
-            limit: 20
-        }
-        if (query.limit && (query.limit >= 1 || query.limit == -1)) {
-            params.limit = parseInt(query.limit)
-        }
-        if (query.page && query.page >= 1) {
-            params.page = parseInt(query.page)
-        }
-        if (query.category_id) {
-            params.category_id = query.category_id 
-        }
-        if (query.user_id) {
-            params.user_id = query.user_id 
-        }
-        if (query.keyword) {
-            params.keyword = query.keyword 
-        }
-        params.offset = params.limit * (params.page - 1)
+        let params = BookList(req.query)
         const data = await  BookModel.list(params);
         if (data) {
             let convertedItems = Converter.BookList(data.results) 
@@ -53,31 +33,9 @@ const BookController = {
     }, 
     one: async (req, res) => {
         let input = {id: req.params.id}
-        const results = await  BookModel.detail(input);
-        if(results.length > 0){
-            let item = {
-                id: results[0].id,
-                name: results[0].name,
-                count_view: results[0].count_view,
-                count_rate: results[0].count_rate,
-                description: results[0].description,
-                image: results[0].image,
-                audio_url: results[0].audio_url,
-                youtube_id: results[0].youtube_id,
-                chanel_video: results[0].chanel_video,
-                created_at: results[0].created_at,
-                updated_at: results[0].updated_at,
-                user: {
-                    id: results[0].user_id,
-                    name: results[0].user_name,
-                    image: results[0].user_image
-                },
-                category: {
-                    id: results[0].category_id,
-                    name: results[0].category_name,
-                    image: results[0].category_image
-                }
-            }
+        const result = await  BookModel.detail(input);
+        if(result){
+            let item = Converter.Book(result)
             input.data = {count_view : Number(item.count_view) + 1}
             await  BookModel.update(input)
             return ResponseSuccess(res, "", item) 

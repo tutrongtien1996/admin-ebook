@@ -23,7 +23,7 @@ const BookController = {
   one: async function(request, response) {
     const input = {id: request.params.id}
     let result = await BookModel.detail(input)
-    response.render('book/viewBook', {item: result[0]});
+    response.render('book/viewBook', {item: result});
   },
   formCreate: async function(request, response) {
     request.url_create_book = "formCreateBook";

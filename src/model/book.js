@@ -13,6 +13,20 @@ const BookModel = {
             if (filter.keyword) {
                 query = query.where("books.name", "LIKE", `%${filter.keyword}%`);
             }
+            if (filter.ids && filter.ids.length > 0) {
+                query = query.whereIn("books.id", filter.ids);
+            }
+            if (filter.exclude_ids && filter.exclude_ids.length > 0) {
+                query = query.whereNotIn("books.id", filter.exclude_ids);
+            }
+            if (filter.related_id) {
+                const relatedBook = await db('books').select('user_id', 'category_id').where('id', filter.related_id).first();
+                if (relatedBook) {
+                    query = query.where("books.category_id", "=", relatedBook.category_id)
+                    .where("books.user_id", "=", relatedBook.user_id)
+                    .where("books.id", "<>", filter.related_id)
+                }
+            }
 
             let countQuery = query.clone().count("* as count");
             let resultQuery = query.clone()
@@ -53,18 +67,22 @@ const BookModel = {
 
     detail: async function(input){
         try{
-            let results = await db('books').select('books.*', db.raw(
-                "IF(books.image <> '', IF(LOCATE('http', books.image) > 0, books.image, CONCAT('" + process.env.APP_URL + "/', books.image)), null) as image"
-                ), 
-                'categories.id as category_id',
-                'categories.name as category_name',
-                'categories.image as category_image',
-                'users.id as user_id',
-                'users.name as user_name',
-                'users.image as user_image'
-            )
-            .leftJoin('categories', 'books.category_id', 'categories.id').leftJoin('users', 'books.user_id', 'users.id').where('books.id', input.id);
-            return results;
+            let result = await db('books')
+                .select('books.*', db.raw(
+                    "IF(books.image <> '', IF(LOCATE('http', books.image) > 0, books.image, CONCAT('" + process.env.APP_URL + "/', books.image)), null) as image"
+                    ), 
+                    'categories.id as category_id',
+                    'categories.name as category_name',
+                    'categories.image as category_image',
+                    'users.id as user_id',
+                    'users.name as user_name',
+                    'users.image as user_image'
+                )
+                .leftJoin('categories', 'books.category_id', 'categories.id')
+                .leftJoin('users', 'books.user_id', 'users.id')
+                .where('books.id', input.id)
+                .first();
+            return result;
         }
         catch {
             return null
