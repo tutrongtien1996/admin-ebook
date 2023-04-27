@@ -69,7 +69,7 @@ const BookController = {
     let categories = await CategoryController.index(request, response)
     const input = {id: request.params.id}
     let book_data = await BookModel.detail(input)
-    response.render('book/formCreateBook', {categories, book: book_data[0]});
+    response.render('book/formCreateBook', {categories, book: book_data});
   },
 
   update: async function(request, response) {
