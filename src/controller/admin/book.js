@@ -11,11 +11,6 @@ const BookController = {
   index: async function(request, response) {
     const query_filter = Helper.setFilter(request.query);
     const data = await  BookModel.list(query_filter);
-    data.results.forEach(element => {
-      if(element.description){
-        element.description = element.description.slice(0, 150) + "..."
-      }
-    });
     data.pages = Helper.pages(query_filter.limit, data.count);
     let accessToken = request.session.user.accessToken
     response.render('book/index', {accessToken, items: data});
@@ -91,9 +86,9 @@ const BookController = {
       if(!results && request.file){
         fs.unlinkSync(request.file.path);
       }
-      if(results && data_get[0].image && request.file){
-          if(fs.existsSync( data_get[0].image )){
-          fs.unlinkSync(data_get[0].image);
+      if(results && data_get.image && request.file){
+          if(fs.existsSync( data_get.image )){
+          fs.unlinkSync(data_get.image);
           }  
       }
     return  response.redirect('/books');

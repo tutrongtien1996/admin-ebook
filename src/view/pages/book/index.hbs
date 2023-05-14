@@ -11,23 +11,29 @@
                 <input type="text" id="keyword_search" class="float-end shadow-none rounded-3 p-1" placeholder="Search book..."> --}}
             </div>
             <div class="card-body">
-                <table id="datatablesSimple">
+                <table id="datatablesSimple" class="table">
                     <thead class="w-100">
-                        <tr class="row">
-                            <th class="col-1">Image</th>
-                            <th  class="col-3">Name</th>
-                            <th  class="col-4">Description</th>
-                            <th  class="col-2" style="max-width: 300px;">Audio_url</th>
-                            <th class="col-2">Action</th>
+                        <tr>
+                            <th>Image</th>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Author</th>
+                            <th>Rate</th>
+                            <th>View</th>
+                            <th>Audio_url</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody class="">
                         {{#each items.results}}
-                        <tr class="row">
+                        <tr>
                             <td style=""><img src="{{image}}" alt="image"></td>
                             <td style="">{{name}}</td>
-                            <td  class=""><div><p class="overflow-auto">{{description}}</p></div></td>
-                            <td  class="col-2"><div class="overflow-hidden"  style="max-width: 300px;"><a href="{{audio_url}}">{{audio_url}}</a></div></td>
+                            <td  class="">{{category_name}}</td>
+                            <td  class="">{{user_name}}</td>
+                            <td  class="">{{count_rate}}</td>
+                            <td  class="">{{count_view}}</td>
+                            <td  class="col-2"><div class="overflow-hidden"  style="max-width: 300px;"><a href="{{audio_url}}" target="_blank">{{audio_url}}</a></div></td>
                             <td class="col-2">
                                 <a href="/books/one/{{id}}" class="btn btn-sm btn-primary">View</a>
                                 <a  href="/books/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>

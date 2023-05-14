@@ -8,6 +8,7 @@ const { BookList } = require('../request/book');
 const BookController = {
     list: async (req, res) => {
         let params = BookList(req.query)
+        params.status = 1
         const data = await  BookModel.list(params);
         if (data) {
             let convertedItems = Converter.BookList(data.results) 

@@ -31,8 +31,8 @@ const RateModel = {
     },
     one: async function(input){
         try{
-            let results = await db('rates').select('*').where('id', input.id);
-            return results;
+            let item = await db('rates').select('*').where('id', input.id).first();
+            return item;
         }
         catch {
             return null

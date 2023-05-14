@@ -10,6 +10,9 @@ const BookModel = {
             if (filter.user_id) {
                 query = query.where("user_id", "=", filter.user_id);
             }
+            if (filter.status) {
+                query = query.where("status", "=", filter.status);
+            }
             if (filter.keyword) {
                 query = query.where("books.name", "LIKE", `%${filter.keyword}%`);
             }

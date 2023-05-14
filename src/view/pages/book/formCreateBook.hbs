@@ -63,12 +63,14 @@
                     </div>
                 </div>
                 <div class="mb-3">  
-                    <label for="image_link" class="form-label">Image link</label>
-                    {{#if book}}
-                        <input type="text" class="form-control shadow-none" id="image_link" placeholder="Enter image link..." name="image_link" value="{{book.image}}">
-                    {{else}}
-                        <input type="text" class="form-control shadow-none" id="image_link" placeholder="Enter image link..." name="image_link">
-                    {{/if}}
+                    <div class="col">
+                        <label for="image_link" class="form-label">Image link</label>
+                        {{#if book}}
+                            <input type="text" class="form-control shadow-none" id="image_link" placeholder="Enter image link..." name="image_link" value="{{book.image}}">
+                        {{else}}
+                            <input type="text" class="form-control shadow-none" id="image_link" placeholder="Enter image link..." name="image_link">
+                        {{/if}}
+                    </div>
                 </div>
             
                 <div class="mb-3">  
@@ -94,6 +96,22 @@
                         <input type="text" class="form-control shadow-none" id="chanel_video" placeholder="Enter chanel video" name="chanel_video" value="{{book.chanel_video}}">
                         {{else}}
                         <input type="text" class="form-control shadow-none" id="chanel_video" placeholder="Enter chanel video" name="chanel_video">
+                        {{/if}}
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="count_rate" class="form-label">Rate:</label>
+                    {{#if book}}
+                        <input type="text" class="form-control shadow-none" id="count_rate" placeholder="" name="count_rate" value="{{book.count_rate}}">
+                        {{else}}
+                        <input type="text" class="form-control shadow-none" id="count_rate" placeholder="" name="count_rate">
+                        {{/if}}
+                    </div>
+                    <div class="mb-3 col">
+                        <label for="count_view" class="form-label">View:</label>
+                    {{#if book}}
+                        <input type="number" class="form-control shadow-none" id="count_view" placeholder="" name="count_view" value="{{book.count_view}}">
+                        {{else}}
+                        <input type="number" class="form-control shadow-none" id="count_view" placeholder="" name="count_view">
                         {{/if}}
                     </div>
                 </div>

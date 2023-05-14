@@ -24,8 +24,8 @@ const RateController = {
     }, 
     one: async (req, res) => {
         let input = {id: req.params.id}
-        const results = await  RateModel.one(input);
-        return (results ? ResponseSuccess(res, "", results[0]) : ResponseFail(res, "data not exist!"))
+        const item = await  RateModel.one(input);
+        return (item ? ResponseSuccess(res, "", item) : ResponseFail(res, "data not exist!"))
     }
     ,
     delete: async (req, res) => {
