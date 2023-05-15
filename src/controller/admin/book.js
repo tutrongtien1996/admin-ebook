@@ -3,8 +3,9 @@ const fs = require('fs');
 const { v4: uuidv4 } = require('uuid');
 const {BookModel} = require('../../model/book');
 const { Helper } = require('../../helper/checkParams');
-const {CategoryController} = require('./category')
-
+const {CategoryController} = require('./category');
+const { FileService } = require('../../helper/fileAWS');
+const fetch = require("node-fetch");
 
 
 const BookController = {
@@ -12,7 +13,7 @@ const BookController = {
     const query_filter = Helper.setFilter(request.query);
     const data = await  BookModel.list(query_filter);
     data.pages = Helper.pages(query_filter.limit, data.count);
-    let accessToken = request.session.user.accessToken
+    let accessToken = request.session.user.accessToken;
     response.render('book/index', {accessToken, items: data});
   },
   one: async function(request, response) {
@@ -32,13 +33,23 @@ const BookController = {
       fs.unlinkSync(request.file.path);
     }
     if(!request.body.name){return   response.redirect('/books');}
-
     delete input.user_display;
-    request.file ? (input.image = request.file.path) : (input.image = input.image_link)
+    let file_name = input.name.replace(/ /g, "-") +"-"+ new Date().getTime();
+    if(request.file){
+      const imagePath = request.file.path
+      const blob = fs.readFileSync(imagePath);
+      input.image = await FileService.save(file_name, blob);
+    }
+    if(!request.file && (input.image_link.length > 0)){
+      const res = await fetch(input.image_link)
+      const blob = await res.buffer()
+      input.image = await FileService.save(file_name, blob);
+    } 
     input.id = uuidv4();
     delete input.image_link;
+    input.image = input.image.Location
     const results = await BookModel.create(input);
-    if(!results && request.file){
+    if(request.file){
       fs.unlinkSync(request.file.path);
     }
     return  response.redirect('/books');
@@ -51,11 +62,6 @@ const BookController = {
       return  response.redirect('/books');
     }
     const results = await  BookModel.delete(input);
-    if(results && data[0].image){
-      if(fs.existsSync( data[0].image )){
-        fs.unlinkSync(data[0].image);
-        } 
-    }
     return  response.redirect('/books');
   },
 
