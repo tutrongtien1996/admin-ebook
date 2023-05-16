@@ -19,18 +19,13 @@ const FileService = {
         }).promise()
         return uploadedImage  
     },
-    // delete: async () => {
-    //   const command = new DeleteObjectCommand({
-    //     Bucket: dotenv.parsed.AWS_S3_BUCKET_NAME,
-    //     Key: 'nameBook/vo-chong-a-phu-1684145611302.png'
-    //   });
-    //   try {
-    //     const response = await client.send(command);
-    //     console.log(response);
-    //   } catch (err) {
-    //     console.error(err);
-    //   }
-    // }
+    delete: async (file_name) => {
+      const deleteImage = await s3.deleteObject({
+        Bucket: dotenv.parsed.AWS_S3_BUCKET_NAME,
+        Key: `nameBook${file_name}`
+      }).promise();
+      return deleteImage
+    }
 }
 
 module.exports = {FileService}

@@ -49,8 +49,9 @@ const BookController = {
     delete input.image_link;
     input.image = input.image.Location
     const results = await BookModel.create(input);
-    if(request.file){
-      fs.unlinkSync(request.file.path);
+    if(!results && input.image.length > 0){
+      let file_name = input.image.slice(input.image.lastIndexOf('/'))
+      await FileService.delete(file_name)
     }
     return  response.redirect('/books');
   },
@@ -61,7 +62,11 @@ const BookController = {
     if(!data){
       return  response.redirect('/books');
     }
+    let file_name = data.image.slice(data.image.lastIndexOf('/'))
     const results = await  BookModel.delete(input);
+    if(results){
+      await FileService.delete(file_name)
+    }
     return  response.redirect('/books');
   },
 
@@ -85,17 +90,24 @@ const BookController = {
       if(!data_get){
         return  response.redirect('/books');
       }
-      request.file ? (input.data.image = request.file.path) : (input.data.image = input.data.image_link)
+      let file_name = input.data.name.replace(/ /g, "-") +"-"+ new Date().getTime();
+      if(request.file){
+        const imagePath = request.file.path
+        const blob = fs.readFileSync(imagePath);
+        input.image = await FileService.save(file_name, blob);
+      }
+      if(!request.file && (input.data.image_link.length > 0)){
+        const res = await fetch(input.data.image_link)
+        const blob = await res.buffer()
+        input.image = await FileService.save(file_name, blob);
+      } 
+      input.data.image = input.image.Location
       delete input.data.image_link;
       let results = await  BookModel.update(input);
       
-      if(!results && request.file){
-        fs.unlinkSync(request.file.path);
-      }
-      if(results && data_get.image && request.file){
-          if(fs.existsSync( data_get.image )){
-          fs.unlinkSync(data_get.image);
-          }  
+      if(!results && input.data.image.length > 0){
+        let file_name = input.data.image.slice(input.data.image.lastIndexOf('/'))
+        await FileService.delete(file_name)
       }
     return  response.redirect('/books');
   }
