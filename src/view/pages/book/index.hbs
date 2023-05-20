@@ -33,7 +33,7 @@
                             <td  class="">{{user_name}}</td>
                             <td  class="">{{count_rate}}</td>
                             <td  class="">{{count_view}}</td>
-                            <td  class="col-2"><div class="overflow-hidden"  style="max-width: 300px;"><a href="{{audio_url}}" target="_blank">{{audio_url}}</a></div></td>
+                            <td  class="col-2"><audio  src="{{audio_url}}" controls="true" class="audio-1 my_audio"></audio></td>
                             <td class="col-2">
                                 <a href="/books/one/{{id}}" class="btn btn-sm btn-primary">View</a>
                                 <a  href="/books/edit/{{id}}" class="btn btn-sm btn-info">Edit</a>
@@ -66,5 +66,4 @@
 <script>
     localStorage.setItem('accessToken', document.querySelector('#accessToken').innerText)
 </script>
-<script src="/public/js/searchBook.js"></script>
 

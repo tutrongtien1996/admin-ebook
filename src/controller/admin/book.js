@@ -95,6 +95,7 @@ const BookController = {
         const imagePath = request.file.path
         const blob = fs.readFileSync(imagePath);
         input.image = await FileService.save(file_name, blob);
+        fs.unlinkSync(request.file.path);
       }
       if(!request.file && (input.data.image_link.length > 0)){
         const res = await fetch(input.data.image_link)
@@ -104,7 +105,10 @@ const BookController = {
       input.data.image = input.image.Location
       delete input.data.image_link;
       let results = await  BookModel.update(input);
-      
+      if(results && data_get){
+        let file_name = data_get.image.slice(data_get.image.lastIndexOf('/'))
+        await FileService.delete(file_name)
+      }
       if(!results && input.data.image.length > 0){
         let file_name = input.data.image.slice(input.data.image.lastIndexOf('/'))
         await FileService.delete(file_name)

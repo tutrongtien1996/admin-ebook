@@ -27,6 +27,9 @@ app.use('/upload', express.static('upload'))
 
 app.set('view engine', 'hbs')
 app.set('views',__dirname + '/src/view/pages');
+app.get('/', (req, res) => {
+  return res.render('landing', {layout: false})
+})
 ConfigSession(app)
 _initRouteAdmin(app)
 _initRouteAPI(app)
