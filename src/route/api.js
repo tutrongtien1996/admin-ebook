@@ -5,6 +5,7 @@ const {BookController} = require('../controller/api/book')
 const {CategoryController} = require('../controller/api/category')
 const {RateController} = require('../controller/api/rate')
 const {UserController} = require('../controller/api/user')
+const {MessageController} = require('../controller/api/message')
 const {AuthMiddle} = require('../helper/middleware');
 
 const AuthRouter = require('express').Router();
@@ -12,6 +13,7 @@ const BookRouter = require('express').Router();
 const CategoryRouter = require('express').Router();
 const RateRouter = require('express').Router();
 const UserRouter = require('express').Router();
+const MessageRouter = require('express').Router();
 
 let isAuth = AuthMiddle.isAuth;
 
@@ -43,6 +45,10 @@ UserRouter.get('/:id',  UserController.one)
 UserRouter.delete('/:id', isAuth, UserController.delete)
 UserRouter.put('/:id', isAuth, UserController.update)
 
+MessageRouter.get('/',  MessageController.list)
+MessageRouter.post('/', MessageController.create)
+MessageRouter.get('/:id',  MessageController.one)
+
 
 const _initRouteAPI = function(app){
     app.use('/api/books', BookRouter)
@@ -50,6 +56,7 @@ const _initRouteAPI = function(app){
     app.use('/api/rates', RateRouter)
     app.use('/api/categories', CategoryRouter)
     app.use('/api/admins', AuthRouter)
+    app.use('/api/message', MessageRouter)
 }
 
 module.exports = {_initRouteAPI}

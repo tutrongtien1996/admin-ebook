@@ -3,6 +3,7 @@ const { AuthController } = require('../controller/admin/auth.js');
 const { DashboardController } = require('../controller/admin/dashboard.js');
 const { CategoryController } = require('../controller/admin/category.js');
 const { BookController } = require('../controller/admin/book.js');
+const { MessageController } = require('../controller/admin/message.js');
 const { AuthorController } = require('../controller/admin/author.js');
 const { uploadProduct } = require('../helper/fileupload.js');
 const { CheckLoggedIn } = require('../helper/util.js');
@@ -11,6 +12,7 @@ const AuthRouter = express.Router();
 const AuthorRouter = express.Router();
 const BookRouter = express.Router();
 const CategoryRouter = express.Router();
+const MessageRouter = express.Router();
 const DashboardRouter = express.Router();
 
 AuthRouter.get('/login', AuthController.login)
@@ -48,12 +50,17 @@ CategoryRouter.get('/delete/:id', CheckLoggedIn, CategoryController.delete)
 CategoryRouter.get('/edit/:id', CheckLoggedIn, CategoryController.formEdit)
 CategoryRouter.post('/edit/:id', CheckLoggedIn, CategoryController.update)
 
+MessageRouter.get('/', CheckLoggedIn, MessageController.index)
+MessageRouter.post('/form', MessageController.store)
+MessageRouter.get('/:id', CheckLoggedIn, MessageController.detail)
+
 const _initRouteAdmin = function (app) {
     app.get('/', CheckLoggedIn, (request, response) => response.redirect('/books'))
     app.use('/auth', AuthRouter)
     app.use('/categories', CategoryRouter)
     app.use('/books', BookRouter)
     app.use('/authors', AuthorRouter)
+    app.use('/messages', MessageRouter)
 }
   
 module.exports = {_initRouteAdmin}

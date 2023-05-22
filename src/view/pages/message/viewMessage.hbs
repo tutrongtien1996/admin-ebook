@@ -1,0 +1,25 @@
+
+<main>
+    <div class="container-fluid px-4">
+        
+        <div class="card  my-4">
+            <div class="card-header">
+                <i class="fas fa-table me-1"></i>
+                Message
+            </div>
+            <div>
+                {{#if items}}
+                    <div class="p-4">
+                        <ul class="list-unstyled">
+                            <li><strong>Name:</strong><p class="ms-3 d-inline fst-italic fw-light">{{items.name}}</p></li>
+                            <li><strong>Phone number:</strong><p class="ms-3 d-inline fst-italic fw-light">{{items.phone_number}}</p></li>
+                            <li><strong>Email:</strong><p class="ms-3 d-inline fst-italic fw-light">{{items.email}}</p></li>
+                            <li><strong>Date time:</strong><p class="ms-3 d-inline fst-italic fw-light">{{items.created_at}}</p></li>
+                            <li><strong>Message:</strong><p class="ms-3 d-inline fst-italic fw-light">{{items.message}}</p></li>
+                        </ul>
+                    </div>
+                {{/if}}
+            </div>
+        </div>
+    </div>
+</main>
