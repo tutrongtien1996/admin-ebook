@@ -55,6 +55,9 @@ const BookController = {
       let file_name = input.image.slice(input.image.lastIndexOf('/'))
       await FileService.delete(file_name)
     }
+    if(request.file){
+      fs.unlinkSync(request.file.path);
+    }
     return  response.redirect('/books');
   },
 
