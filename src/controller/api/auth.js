@@ -37,7 +37,7 @@ const AuthAPIController = {
         const password = req.body.password;
     
         const users = await AuthModel.getUser(username);
-        if (users.length == 0) {
+        if (!users) {
             return req.isServer ? {value: false, message: "username not's exist!"}  : ResponseFail(res, "username not's exist!")
         }
     
