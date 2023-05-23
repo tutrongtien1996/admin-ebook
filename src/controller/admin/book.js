@@ -47,9 +47,11 @@ const BookController = {
     } 
     input.id = uuidv4();
     delete input.image_link;
-    input.image = input.image.Location
+    if(input.image){
+      input.image = input.image.Location
+    }
     const results = await BookModel.create(input);
-    if(!results && input.image.length > 0){
+    if(!results && input.image){
       let file_name = input.image.slice(input.image.lastIndexOf('/'))
       await FileService.delete(file_name)
     }
