@@ -61,6 +61,12 @@ const _initRouteAdmin = function (app) {
     app.use('/books', BookRouter)
     app.use('/authors', AuthorRouter)
     app.use('/messages', MessageRouter)
+    app.use('/privacy-policy', (req, res) => {
+      return res.render('landing/privacy-policy', {layout: false})
+    })
+    app.use('/terms-of-services', (req, res) => {
+      return res.render('landing/terms_of_services', {layout: false})
+    })
 }
   
 module.exports = {_initRouteAdmin}
