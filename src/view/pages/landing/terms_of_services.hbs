@@ -20,7 +20,7 @@
 
   <!-- slider stylesheet -->
   <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.1.3/assets/owl.carousel.min.css" />
-  <link rel="icon" type="image/png" href="/public/css/landing/images/LogoEbookTrong.png"/>+
+  <link rel="icon" type="image/png" href="/public/css/landing/images/LogoEbookTrong.png"/>
 
   <!-- bootstrap core css -->
   <link rel="stylesheet" type="text/css" href="/public/css/landing/css/bootstrap.css" />
@@ -46,7 +46,7 @@
                 </a>
                 <div class="navbar-collapse" id="">
                     <div class="custom_menu-btn">
-                      <button onclick="openNav()">
+                      <button style="background-color:rgb(137, 137, 137); height: 30px; width: 30px" class="btn_bar" onclick="openNav()">
                         <span class="s-1"> </span>
                         <span class="s-2"> </span>
                         <span class="s-3"> </span>
@@ -54,9 +54,9 @@
                     </div>
                     <div id="myNav" class="overlay">
                       <div class="overlay-content">
-                        <a href="landing.html">Landing</a>
-                        <a href="privacy-policy.html">Privacy policy</a>
-                        <a href="terms_of_services.html">Terms of services</a>
+                        <a href="/">Landing</a>
+                        <a href="privacy-policy">Privacy policy</a>
+                        <a href="terms-of-services">Terms of services</a>
                       </div>
                     </div>
                   </div>
@@ -294,7 +294,7 @@
                 </div>
             </div>
         </div>
-        <div class="container mx-auto md:pt-28 p-5" style="background-image: linear-gradient(to bottom right, rgb(255, 196, 0), #fe7225);">
+        <div class=" mx-auto md:pt-28 p-5" style="background-image: linear-gradient(to bottom right, rgb(255, 196, 0), #fe7225);">
             <div class="d-flex">
                 <div class="width-100 text-center ">
                     <h1 class="text-white">Ứng dụng có sẵn trên Google Play và App Store</h1>
@@ -309,34 +309,47 @@
                 </div>
             </div>
         </div>
-        <div class="container mx-auto mt-10 p-5">
-            <div class="row">
-                <div class="col-6">
-                    <div>
-                        <img src="/public/css/landing/images/LogoEbookTrong.png" width="45" height="45"/>
-                        <span style="font-size: 24px; font-weight: 700; color: #fe7225; margin-top: 10px;">
-                            MyEBoo
-                        </span>
-                    </div>
-                    
-                    <p class="mt-5">Ứng dụng tóm tắt sách MyEBoo</p>
-                    <p>Thấu hiểu sách chỉ trong 30 phút.</p>
-                </div>
-                <div class="col-6">
-                    <div style="margin-bottom:10px">
-                        <a href="/terms_of_services">Điều khoản sử dụng</a>
-                    </div>
-                    <div style="margin-bottom:10px">
-                        <a href="/privacy-pilicy">Chính sách bảo mật</a>
-                    </div>
-                    <div style="margin-bottom:10px">
-                        <a target="_blank" href="https://www.facebook.com/audiomyeboo">Fanpage Facebook</a>
-                    </div>
-                    <p>Email: myeboo@gmail.com</p>
-                </div>
-            </div>
-        </div>
+        <section class="info_section layout_padding-top">
+    <div class="info_logo-box">
+  
+        <img src="/public/css/landing/images/LogoEbookTrong.png" height="50px"  alt="">
+        <h2 style="color: #fe7225"> 
+          MyEBoo
+        </h2>
     </div>
+    <div class="container">
+      <div class="social_container">
+        <div class="text-center" style="line-height: 5px">
+          <p>myeboo@gmail.com</p><br>
+          <p>090 191 5121 - 0325 187 911</p>
+        </div>
+        <div class="social-box">
+          <a href="">
+            <img src="/public/css/landing/images/fb.png" alt="">
+          </a>
+
+          <a href="">
+            <img src="/public/css/landing/images/twitter.png" alt="">
+          </a>
+          <a href="">
+            <img src="/public/css/landing/images/linkedin.png" alt="">
+          </a>
+          <a href="">
+            <img src="/public/css/landing/images/instagram.png" alt="">
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+    </div>
+    <script>
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document
+        .querySelector(".custom_menu-btn")
+        .classList.toggle("menu_btn-style");
+    }
+  </script>
 </body>
 
 </html>

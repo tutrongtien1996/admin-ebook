@@ -47,7 +47,7 @@
           </a>
           <div class="navbar-collapse" id="">
             <div class="custom_menu-btn">
-              <button onclick="openNav()">
+              <button style="background-color:rgb(137, 137, 137); height: 30px; width: 30px" class="btn_bar" onclick="openNav()">
                 <span class="s-1"> </span>
                 <span class="s-2"> </span>
                 <span class="s-3"> </span>
@@ -55,9 +55,9 @@
             </div>
             <div id="myNav" class="overlay">
               <div class="overlay-content">
-                <a href="landing.html">Landing</a>
-                <a href="privacy-policy.html">Privacy policy</a>
-                <a href="terms_of_services.html">Terms of services</a>
+                <a href="/">Landing</a>
+                <a href="privacy-policy">Privacy policy</a>
+                <a href="terms-of-services">Terms of services</a>
               </div>
             </div>
           </div>
@@ -153,6 +153,14 @@
       </div>
     </div>
   </section>
+  <script>
+    function openNav() {
+      document.getElementById("myNav").classList.toggle("menu_width");
+      document
+        .querySelector(".custom_menu-btn")
+        .classList.toggle("menu_btn-style");
+    }
+  </script>
 </body>
 
 </html>
