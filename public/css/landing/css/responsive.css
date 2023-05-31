@@ -1,11 +1,5 @@
 @media (max-width: 1120px) {
 
-
-    .slider_section .img-box img {
-        height: 200px !important;
-        width: auto;
-    }
-
     .slider_section .detail-box h1 {
         font-size: 4.5rem;
     }
@@ -99,7 +93,14 @@
     .contact_section input {
         width: 100%;
     }
+    .slider_section .img-box img {
+        height: 500px !important;
+        width: auto;
+    }
+    .slider_section{
+        padding: 0px !important;
 
+    }
     .info_section .social-box {
         width: auto;
     }

@@ -3,7 +3,9 @@ body {
   color: #0c0c0c;
   background-color: #ffffff;
 }
-
+.slide_image img{
+ width: 100% !important;
+}
 .layout_margin {
   margin: 90px 0;
 }
@@ -846,5 +848,10 @@ a:focus {
 
 .footer_section a {
   color: #fefdfc;
+}
+@media only screen and (max-width: 600px){
+  .client_section .client_container .client-id .img-box img {
+    height: 20px !important
+  }
 }
 /*# sourceMappingURL=style.css.map */
