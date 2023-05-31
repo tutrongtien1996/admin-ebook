@@ -12,7 +12,7 @@ const MessageController = {
       element.message = element.message.slice(0, 100);
        element.created_at = new Date(element.created_at).getDate() + "/" + new Date(element.created_at).getMonth() + "/" + new Date(element.created_at).getFullYear()
     });
-    return response.render('message/index', {items: data});
+    return response.render('admin/pages/message/index', {items: data});
   },
 
   store: async function(request, response){
@@ -33,7 +33,7 @@ const MessageController = {
     }
     let results = await MessageModel.one(input);
     results.created_at = new Date(results.created_at).getHours() + ":" + new Date(results.created_at).getMinutes() + " " + new Date(results.created_at).getDate() + "/" + new Date(results.created_at).getMonth() + "/" + new Date(results.created_at).getFullYear()
-    return response.render('message/viewMessage', {items: results});
+    return response.render('admin/pages/message/viewMessage', {items: results});
   }
 
 }

@@ -14,17 +14,17 @@ const BookController = {
     const data = await  BookModel.list(query_filter);
     data.pages = Helper.pages(query_filter.limit, data.count);
     let accessToken = request.session.user.accessToken;
-    response.render('book/index', {accessToken, items: data});
+    response.render('admin/pages/book/index', {accessToken, items: data});
   },
   one: async function(request, response) {
     const input = {id: request.params.id}
     let result = await BookModel.detail(input)
-    response.render('book/viewBook', {item: result});
+    response.render('admin/pages/book/viewBook', {item: result});
   },
   formCreate: async function(request, response) {
     request.url_create_book = "formCreateBook";
     let categories = await CategoryController.index(request, response)
-    response.render('book/formCreateBook', {categories});
+    response.render('admin/pages/book/formCreateBook', {categories});
   },
 
   store: async function(request, response){
@@ -80,7 +80,7 @@ const BookController = {
     let categories = await CategoryController.index(request, response)
     const input = {id: request.params.id}
     let book_data = await BookModel.detail(input)
-    response.render('book/formCreateBook', {categories, book: book_data});
+    response.render('admin/pages/book/formCreateBook', {categories, book: book_data});
   },
 
   update: async function(request, response) {

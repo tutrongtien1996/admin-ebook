@@ -87,6 +87,9 @@
     .contact_img-box {
         margin-top: 45px;
     }
+    .contact_img-box img {
+        width: 100%;
+    }
 }
 
 @media (max-width: 576px) {
@@ -94,8 +97,8 @@
         width: 100%;
     }
     .slider_section .img-box img {
-        height: 500px !important;
-        width: auto;
+        height: 100% !important;
+        width: 100%;
     }
     .slider_section{
         padding: 0px !important;

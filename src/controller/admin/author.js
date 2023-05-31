@@ -6,7 +6,7 @@ const { v4: uuidv4 } = require('uuid');
 const AuthorController = {
   index: async function(request, response) {
     const results = await  UserModel.list();
-    return request.url_create_book ? results : response.render('author/author', {items: results});
+    return request.url_create_book ? results : response.render('admin/pages/author/author', {items: results});
   },
   one: async function(request, response) {
     var id = "";
@@ -29,11 +29,11 @@ const AuthorController = {
       },
       books: listBook
     }
-    return response.render('author/author_detail', {data: data})
+    return response.render('admin/pages/author/author_detail', {data: data})
   },
 
   formCreate: async function(request, response) {
-    response.render('author/formCreateAuthor')
+    response.render('admin/pages/author/formCreateAuthor')
   },
 
   store: async function(request, response){

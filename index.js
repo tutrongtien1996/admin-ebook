@@ -9,6 +9,7 @@ dotenv.config();
 
 const { _initRouteAdmin } = require('./src/route/admin');
 const { _initRouteAPI } = require('./src/route/api');
+const { _initRouteWeb } = require('./src/route/web');
 
 const app = express();
 app.use(cors())
@@ -17,8 +18,8 @@ app.use(bodyParser.urlencoded({extended: true}));
 app.use(cookieParser());
 const port = process.env.APP_PORT;
 app.engine('hbs', exphbs.engine({
-  layoutsDir: __dirname + '/src/view',
-  partialsDir: __dirname + '/src/view/partials',
+  layoutsDir: __dirname + '/src/view/admin',
+  partialsDir: __dirname + '/src/view/admin/partials',
   extname: 'hbs',
   defaultLayout: 'main',
 }))
@@ -26,11 +27,9 @@ app.use('/public', express.static('public'))
 app.use('/upload', express.static('upload'))
 
 app.set('view engine', 'hbs')
-app.set('views',__dirname + '/src/view/pages');
-app.get('/', (req, res) => {
-  return res.render('landing/landing', {layout: false})
-})
+app.set('views',__dirname + '/src/view');
 ConfigSession(app)
+_initRouteWeb(app)
 _initRouteAdmin(app)
 _initRouteAPI(app)
 

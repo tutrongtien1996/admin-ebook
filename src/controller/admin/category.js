@@ -5,11 +5,11 @@ const {CategoryModel} = require("../../model/category");
 const CategoryController = {
   index: async function(request, response) {
     let results = await CategoryModel.list();
-    return request.url_create_book ? results : response.render('category/category', {items: results});
+    return request.url_create_book ? results : response.render('admin/pages/category/category', {items: results});
   },
 
   formCreate: async function(request, response) {
-    response.render('category/formCategory')
+    response.render('admin/pages/category/formCategory')
   },
 
   store: async function(request, response){
@@ -37,7 +37,7 @@ const CategoryController = {
       limit: -1
     }
     let dataBook = await BookModel.list(input);
-    return response.render('book/index', {items: dataBook});
+    return response.render('admin/pages/book/index', {items: dataBook});
   },
 
   delete: async function(request, response){
@@ -51,7 +51,7 @@ const CategoryController = {
     let {id} = request.params;
     let input = {id}
     let results = await CategoryModel.one(input);
-    response.render('category/formCategory', {data: results[0]})
+    response.render('admin/pages/category/formCategory', {data: results[0]})
   },
 
   update: async function(request, response) {

@@ -3,7 +3,7 @@ const {ResponseSuccess, ResponseFail, getResponse} = require('../../helper/respo
 const { v4: uuidv4 } = require('uuid');
 const fs = require('fs')
 const { Converter } = require('../../helper/Converter');
-const { BookList } = require('../request/book');
+const { BookList } = require('../../request/book');
 
 const BookController = {
     list: async (req, res) => {

@@ -5,7 +5,6 @@ const { CategoryController } = require('../controller/admin/category.js');
 const { BookController } = require('../controller/admin/book.js');
 const { MessageController } = require('../controller/admin/message.js');
 const { AuthorController } = require('../controller/admin/author.js');
-const { landingController } = require('../controller/admin/landing.js');
 const { uploadProduct } = require('../helper/fileupload.js');
 const { CheckLoggedIn } = require('../helper/util.js');
 
@@ -15,7 +14,6 @@ const BookRouter = express.Router();
 const CategoryRouter = express.Router();
 const MessageRouter = express.Router();
 const DashboardRouter = express.Router();
-const landingRouter = express.Router();
 
 AuthRouter.get('/login', AuthController.login)
 AuthRouter.post('/login', AuthController.DoLogin)
@@ -56,9 +54,6 @@ MessageRouter.get('/', CheckLoggedIn, MessageController.index)
 MessageRouter.post('/form', MessageController.store)
 MessageRouter.get('/:id', CheckLoggedIn, MessageController.detail)
 
-landingRouter.get('/privacy-policy', landingController.pravicy)
-landingRouter.get('/terms-of-services', landingController.terms)
-
 const _initRouteAdmin = function (app) {
     app.get('/', CheckLoggedIn, (request, response) => response.redirect('/books'))
     app.use('/auth', AuthRouter)
@@ -66,7 +61,6 @@ const _initRouteAdmin = function (app) {
     app.use('/books', BookRouter)
     app.use('/authors', AuthorRouter)
     app.use('/messages', MessageRouter)
-    app.use('/', landingRouter)
 }
   
 module.exports = {_initRouteAdmin}

@@ -5,7 +5,7 @@ const { AuthAPIController } = require("../api/auth");
 
 const AuthController = {
   login: function(request, response) {
-    return response.render('login', {layout: false});
+    return response.render('admin/pages/login', {layout: false});
   },
   DoLogin: async function(request, response) {
     request.isServer = true
