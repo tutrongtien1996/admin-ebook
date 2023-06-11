@@ -1,4 +1,4 @@
-const URL_API = "http://ebook.zeopos.com"
+const URL_API = "http://eboo.zeopos.com"
 async function start(){
     let listAuthors = await getAuthors()
     addDataNewAuthor()
